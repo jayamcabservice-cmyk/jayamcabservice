@@ -286,10 +286,10 @@ const BookingForm = () => {
         const whatsappUrl = `https://wa.me/917972732871?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
 
-        // Also trigger phone call
+        // Also trigger phone call — use window.open so browsers don't block it
         setTimeout(() => {
-            window.location.href = 'tel:+917972732871';
-        }, 500);
+            window.open('tel:+917972732871', '_self');
+        }, 1000);
     };
 
     const swapLocations = () => {
