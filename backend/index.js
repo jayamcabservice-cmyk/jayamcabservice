@@ -34,7 +34,8 @@ app.use(cors({
     origin: [
         'http://localhost:5173',
         'http://localhost:4173',
-        /\.onrender\.com$/,   // all Render subdomains
+        'https://travel-kqnc.onrender.com',
+        /\.onrender\.com$/,
     ],
     credentials: true,
 }));
