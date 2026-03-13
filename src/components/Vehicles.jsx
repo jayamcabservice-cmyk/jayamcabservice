@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaUsers, FaSuitcase, FaSnowflake, FaWifi, FaBolt, FaCoffee } from 'react-icons/fa';
 import { fetchVehicles } from '../services/api';
+import useGsapReveal from '../hooks/useGsapReveal';
 
 const Vehicles = () => {
     const [filter, setFilter] = useState('all');
