@@ -97,16 +97,16 @@ const FeaturedDestinations = () => {
     const carouselRef = useIntersectionReveal('fadeUp', { duration: 0.8 });
 
     return (
-        <section className="py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div
                     ref={headerRef}
-                    className="text-center mb-12"
+                    className="text-center mb-8 sm:mb-10 lg:mb-12"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold text-india-blue-800 mb-4">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-india-blue-800 mb-3">
                         Popular Destinations of Maharashtra
                     </h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-sm sm:text-base lg:text-xl text-gray-600 max-w-2xl mx-auto">
                         Explore the most beautiful tourist spots across Maharashtra
                     </p>
                 </div>
@@ -123,14 +123,14 @@ const FeaturedDestinations = () => {
 
                     <div
                         ref={scrollRef}
-                        className="flex gap-6 overflow-x-hidden py-4"
+                        className="flex gap-4 sm:gap-6 overflow-x-hidden py-4"
                         style={{ scrollBehavior: 'auto' }}
                     >
                         {duplicatedDestinations.map((destination, index) => (
                             <motion.div
                                 key={`${destination.id}-${index}`}
-                                whileHover={{ y: -10, scale: 1.03 }}
-                                className="flex-shrink-0 w-80 md:w-96 h-96 relative rounded-3xl overflow-hidden shadow-xl group cursor-pointer"
+                                whileHover={{ y: -8, scale: 1.02 }}
+                                className="flex-shrink-0 w-56 sm:w-72 md:w-80 lg:w-96 h-72 sm:h-80 md:h-96 relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl group cursor-pointer"
                             >
                                 <img
                                     src={destination.image}
@@ -141,26 +141,17 @@ const FeaturedDestinations = () => {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
                                 {/* Tag badge */}
-                                <div className="absolute top-4 right-4 bg-india-saffron-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                                <div className="absolute top-3 right-3 bg-india-saffron-500 text-white px-2.5 sm:px-4 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-bold shadow-lg">
                                     {destination.tag}
                                 </div>
 
                                 {/* Content */}
-                                <div className="absolute bottom-0 left-0 right-0 p-6 transform transition-transform duration-300 group-hover:translate-y-0">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <FaMapMarkerAlt className="text-india-saffron-400 text-xl" />
-                                        <h3 className="text-2xl font-bold text-white">{destination.name}</h3>
+                                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6">
+                                    <div className="flex items-center gap-1.5 sm:gap-2 mb-1">
+                                        <FaMapMarkerAlt className="text-india-saffron-400 text-sm sm:text-xl flex-shrink-0" />
+                                        <h3 className="text-base sm:text-xl lg:text-2xl font-bold text-white leading-tight">{destination.name}</h3>
                                     </div>
-                                    <p className="text-gray-200 text-lg">{destination.description}</p>
-
-                                    {/* Explore button - appears on hover */}
-                                    <motion.button
-                                        initial={{ opacity: 0, y: 10 }}
-                                        whileHover={{ opacity: 1, y: 0 }}
-                                        className="mt-4 px-6 py-2 bg-white text-india-blue-800 font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
-                                    >
-                                        Explore Now
-                                    </motion.button>
+                                    <p className="text-gray-200 text-xs sm:text-base">{destination.description}</p>
                                 </div>
                             </motion.div>
                         ))}

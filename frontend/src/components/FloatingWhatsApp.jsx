@@ -5,53 +5,34 @@ import { FaPhoneAlt } from 'react-icons/fa';
 const PHONE = '+917972732871';
 const WHATSAPP = 'https://wa.me/917030571513';
 
-// Shared pulse animation config
-const pulseAnim = {
-    animate: {
-        scale: [1, 1.08, 1],
-        boxShadow: [
-            '0 0 0 0 rgba(34,197,94,0.7)',
-            '0 0 0 14px rgba(34,197,94,0)',
-            '0 0 0 0 rgba(34,197,94,0)',
-        ],
-    },
-    transition: {
-        duration: 1.5,
-        repeat: Infinity,
-        ease: 'easeInOut',
-    },
-};
-
 const FloatingWhatsApp = () => {
     return (
         <>
-            {/* ── Floating Call Button — mobile only (desktop uses navbar button) ── */}
+            {/* ── Floating Call Button — mobile only ── */}
             <motion.a
                 href={`tel:${PHONE}`}
                 aria-label="Call us"
-                className="lg:hidden fixed bottom-[6.5rem] right-6 z-[100] bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 transition-colors duration-300"
-                animate={pulseAnim.animate}
-                transition={{ ...pulseAnim.transition, delay: 0.75 }}
+                className="call-blink lg:hidden fixed right-4 z-[100] bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-14 h-14 transition-colors duration-300"
+                style={{ bottom: 'calc(5.25rem + env(safe-area-inset-bottom, 0px))' }}
                 whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.93 }}
             >
-                <FaPhoneAlt className="animate-wiggle w-6 h-6 sm:w-7 sm:h-7" />
+                <FaPhoneAlt className="w-5 h-5" />
             </motion.a>
 
-            {/* ── Floating WhatsApp Button ── */}
+            {/* ── Floating WhatsApp Button — all screens ── */}
             <motion.a
                 href={WHATSAPP}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="fixed bottom-6 right-6 z-[100] bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 transition-colors duration-300"
-                animate={pulseAnim.animate}
-                transition={pulseAnim.transition}
-                whileHover={{ scale: 1.1 }}
+                className="whatsapp-blink fixed right-4 z-[100] bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-14 h-14 transition-colors duration-300"
+                style={{ bottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))' }}
+                whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Chat on WhatsApp"
             >
                 <svg
-                    className="w-8 h-8 sm:w-10 sm:h-10"
+                    className="w-7 h-7"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"

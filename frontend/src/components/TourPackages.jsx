@@ -340,7 +340,7 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                 {showHardcoded && type === 'maharashtra' && (
                     <>
                         {/* Packages Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                             {maharashtraRoutes.map((pkg) => (
                                 <motion.div
                                     key={pkg.id}
@@ -348,11 +348,11 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6 }}
-                                    whileHover={{ y: -15 }}
-                                    className="package-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group relative"
+                                    whileHover={{ y: -10 }}
+                                    className="package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group relative"
                                 >
                                     {/* Image */}
-                                    <div className="relative h-64 overflow-hidden">
+                                    <div className="relative h-48 sm:h-56 lg:h-64 overflow-hidden">
                                         <motion.img
                                             src={pkg.image}
                                             alt={pkg.title}
@@ -395,11 +395,11 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                         <div className="absolute inset-0 bg-gradient-to-br from-india-blue-50/0 to-india-saffron-50/0 group-hover:from-india-blue-50/50 group-hover:to-india-saffron-50/50 transition-all duration-500 rounded-b-2xl" />
 
                                         <div className="relative z-10">
-                                            <h3 className="text-2xl font-bold text-india-blue-800 mb-2 group-hover:text-india-blue-900 transition-colors">
+                                            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-india-blue-800 mb-2 group-hover:text-india-blue-900 transition-colors leading-tight">
                                                 {pkg.title}
                                             </h3>
-                                            <p className="text-gray-600 mb-2 group-hover:text-gray-700 transition-colors">{pkg.location}</p>
-                                            <p className="text-gray-500 text-sm mb-4">{pkg.description}</p>
+                                            <p className="text-sm text-gray-600 mb-1.5 group-hover:text-gray-700 transition-colors">{pkg.location}</p>
+                                            <p className="text-gray-500 text-xs sm:text-sm mb-3 sm:mb-4">{pkg.description}</p>
 
                                             <div className="flex items-center justify-between mt-6">
                                                 <div>
@@ -432,7 +432,7 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                 {showHardcoded && type === 'india' && (
                     <>
                         {/* Packages Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                             {indiaPackages.map((pkg) => (
                                 <motion.div
                                     key={pkg.id}
@@ -440,8 +440,8 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6 }}
-                                    whileHover={{ y: -15 }}
-                                    className="package-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group relative"
+                                    whileHover={{ y: -10 }}
+                                    className="package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group relative"
                                 >
                                     {/* Image */}
                                     <div className="relative h-64 overflow-hidden">

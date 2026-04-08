@@ -133,14 +133,14 @@ const Testimonials = ({ preview = false }) => {
     }, [isPaused]);
 
     return (
-        <section ref={sectionRef} className="py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+        <section ref={sectionRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
-                <div ref={headingRef} className="text-center mb-12">
-                    <h2 className="text-4xl md:text-5xl font-bold text-india-blue-800 mb-4">
+                <div ref={headingRef} className="text-center mb-8 sm:mb-10 lg:mb-12">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-india-blue-800 mb-3">
                         What Our Travelers Say
                     </h2>
-                    <p className="text-xl text-gray-600">
+                    <p className="text-sm sm:text-base lg:text-xl text-gray-600">
                         Real experiences from people who traveled with us
                     </p>
                 </div>
@@ -168,7 +168,7 @@ const Testimonials = ({ preview = false }) => {
                             <motion.div
                                 key={`${testimonial.id}-${index}`}
                                 whileHover={{ y: -8, scale: 1.02 }}
-                                className="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg p-6 relative overflow-hidden group"
+                                className="flex-shrink-0 w-72 sm:w-80 bg-white rounded-2xl shadow-lg p-4 sm:p-6 relative overflow-hidden group"
                             >
                                 {/* Quote Icon Background */}
                                 <div className="absolute top-4 right-4 opacity-10">
@@ -211,23 +211,23 @@ const Testimonials = ({ preview = false }) => {
                     </div>
                 </div>
 
-                {/* Stats Section */}
-                <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-                    <div className="text-center p-6 bg-white rounded-xl shadow-md">
-                        <div className="text-4xl font-bold text-india-blue-700 mb-2">10,000+</div>
-                        <div className="text-gray-600">Happy Travelers</div>
+                {/* Stats Section — 2-col on mobile, 4 on desktop */}
+                <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mt-10 sm:mt-12 lg:mt-16">
+                    <div className="text-center p-4 sm:p-6 bg-white rounded-xl shadow-md">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-india-blue-700 mb-1 sm:mb-2">10,000+</div>
+                        <div className="text-xs sm:text-sm text-gray-600">Happy Travelers</div>
                     </div>
-                    <div className="text-center p-6 bg-white rounded-xl shadow-md">
-                        <div className="text-4xl font-bold text-india-saffron-600 mb-2">4.9/5</div>
-                        <div className="text-gray-600">Average Rating</div>
+                    <div className="text-center p-4 sm:p-6 bg-white rounded-xl shadow-md">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-india-saffron-600 mb-1 sm:mb-2">4.9/5</div>
+                        <div className="text-xs sm:text-sm text-gray-600">Average Rating</div>
                     </div>
-                    <div className="text-center p-6 bg-white rounded-xl shadow-md">
-                        <div className="text-4xl font-bold text-india-blue-700 mb-2">500+</div>
-                        <div className="text-gray-600">Tours Completed</div>
+                    <div className="text-center p-4 sm:p-6 bg-white rounded-xl shadow-md">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-india-blue-700 mb-1 sm:mb-2">500+</div>
+                        <div className="text-xs sm:text-sm text-gray-600">Tours Completed</div>
                     </div>
-                    <div className="text-center p-6 bg-white rounded-xl shadow-md">
-                        <div className="text-4xl font-bold text-india-saffron-600 mb-2">15+</div>
-                        <div className="text-gray-600">Years Experience</div>
+                    <div className="text-center p-4 sm:p-6 bg-white rounded-xl shadow-md">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-india-saffron-600 mb-1 sm:mb-2">15+</div>
+                        <div className="text-xs sm:text-sm text-gray-600">Years Experience</div>
                     </div>
                 </div>
             </div>

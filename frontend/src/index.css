@@ -32,12 +32,53 @@
 
 * {
   scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent; /* Remove tap flash on mobile */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  /* Prevent font size inflation on mobile landscape */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Safe area for notch/gesture bar phones */
+  padding-bottom: env(safe-area-inset-bottom);
+  overflow-x: hidden;
+}
+
+/* Ensure interactive buttons are at least 44px touch targets */
+button, [role="button"] {
+  min-height: 44px;
+}
+
+/* Nav links and standalone anchors get min touch size but stay block-flow */
+a:not(p a):not(li a):not(span a):not(nav a) {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Override for inline text links */
+p a, li a, span a, nav a {
+  min-height: unset;
+  display: inline;
+}
+
+/* Prevent horizontal scroll */
+.overflow-x-safe {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Mobile-first section padding */
+section {
+  overflow-x: hidden;
 }
 
 .blur-bg {
@@ -148,11 +189,18 @@ body {
   animation: wiggle 1.4s ease-in-out infinite;
 }
 
-@keyframes phone-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
-  50%       { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+/* Gentle glow blink for WhatsApp / Call buttons — no sweep, just a soft pulse */
+@keyframes gentle-glow {
+  0%, 100% { box-shadow: 0 4px 20px rgba(34, 197, 94, 0.35); }
+  50%       { box-shadow: 0 4px 28px rgba(34, 197, 94, 0.75); }
 }
 
-.call-btn-glow {
-  animation: phone-glow 1.8s ease-in-out infinite;
-}
+.whatsapp-blink {
+  animation: gentle-glow 2s ease-in-out infinite;
+}
+
+.call-blink {
+  animation: gentle-glow 2s ease-in-out infinite;
+  animation-delay: 1s;
+}
+

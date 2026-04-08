@@ -89,41 +89,29 @@ export const loginWithEmail = async (email, password) => {
 
 /**
  * Login with Google
- * Backend verifies and creates session
+ * Uses Firebase popup — user is authenticated directly by Firebase.
+ * No custom token exchange needed (popup already signs the user in).
  */
 export const loginWithGoogle = async () => {
   try {
-    // For Google auth, we'll still use popup but backend will verify
-    // This is a simplified version - full implementation would handle Google OAuth on backend
     const { signInWithPopup, GoogleAuthProvider } = await import('firebase/auth');
     const provider = new GoogleAuthProvider();
+
+    // This both opens the popup AND signs the user into Firebase on success
     const result = await signInWithPopup(auth, provider);
+
+    // User is already authenticated — just grab the ID token
     const idToken = await result.user.getIdToken();
-    
-    // Send to backend for admin verification and custom token
-    const response = await fetch(`${API_URL}/api/auth/google`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ idToken }),
-    });
-    
-    const data = await response.json();
-    
-    if (!response.ok) {
-      throw new Error(data.message || 'Google login failed');
-    }
-    
-    // Exchange custom token for fresh Firebase ID token
-    const userCredential = await signInWithCustomToken(auth, data.customToken);
-    const finalIdToken = await userCredential.user.getIdToken();
-    
-    localStorage.setItem('authToken', finalIdToken);
-    
+
+    // Persist token for API calls
+    localStorage.setItem('authToken', idToken);
+    localStorage.setItem('adminEmail', result.user.email || '');
+
     return {
       success: true,
       uid: result.user.uid,
       email: result.user.email,
-      token: finalIdToken,
+      token: idToken,
     };
   } catch (error) {
     console.error('Google login error:', error.message);

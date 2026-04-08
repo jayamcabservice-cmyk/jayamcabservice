@@ -72,33 +72,33 @@ const PopularRoutes = () => {
     ];
 
     return (
-        <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-50 to-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
-                <div className="text-center mb-14">
-                    <div ref={badgeRef} className="inline-flex items-center gap-2 bg-india-blue-50 text-india-blue-600 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 border border-india-blue-100">
+                <div className="text-center mb-8 sm:mb-12 lg:mb-14">
+                    <div ref={badgeRef} className="inline-flex items-center gap-2 bg-india-blue-50 text-india-blue-600 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4 border border-india-blue-100">
                         <FaRoute className="text-xs" /> Popular Routes
                     </div>
                     <div ref={headingRef}>
-                        <h2 className="text-4xl md:text-5xl font-bold text-india-blue-800 mb-3">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-india-blue-800 mb-2 sm:mb-3">
                             Popular Outstation Routes
                         </h2>
-                        <p className="text-base text-gray-500 max-w-lg mx-auto">
+                        <p className="text-sm sm:text-base text-gray-500 max-w-lg mx-auto">
                             Most booked cab routes with transparent pricing and comfortable rides
                         </p>
                     </div>
                 </div>
 
-                {/* Routes Grid */}
-                <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Routes Grid — 1 col mobile, 2 tablet, 3 desktop */}
+                <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
                     {routes.map((route, i) => (
                         <motion.div
                             key={i}
-                            whileHover={{ y: -8 }}
-                            className="route-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-400 group cursor-pointer"
+                            whileHover={{ y: -6 }}
+                            className="route-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-400 group cursor-pointer"
                         >
                             {/* Image */}
-                            <div className="relative h-44 overflow-hidden">
+                            <div className="relative h-36 sm:h-44 overflow-hidden">
                                 <img
                                     src={route.image}
                                     alt={`${route.from} to ${route.to}`}
@@ -109,7 +109,7 @@ const PopularRoutes = () => {
 
                                 {/* Tag */}
                                 <span
-                                    className="absolute top-3 right-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-white"
+                                    className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-white"
                                     style={{ backgroundColor: route.color }}
                                 >
                                     {route.tag}
@@ -117,7 +117,7 @@ const PopularRoutes = () => {
 
                                 {/* Route name overlay */}
                                 <div className="absolute bottom-3 left-4 right-4">
-                                    <h3 className="text-white font-bold text-lg flex items-center gap-2">
+                                    <h3 className="text-white font-bold text-base sm:text-lg flex items-center gap-2">
                                         {route.from}
                                         <FaArrowRight className="text-india-saffron-400 text-sm" />
                                         {route.to}
@@ -126,9 +126,9 @@ const PopularRoutes = () => {
                             </div>
 
                             {/* Info */}
-                            <div className="p-5">
-                                <div className="flex items-center justify-between mb-4">
-                                    <div className="flex items-center gap-4 text-sm text-gray-600">
+                            <div className="p-4 sm:p-5">
+                                <div className="flex items-center justify-between mb-3">
+                                    <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-600">
                                         <span className="flex items-center gap-1">
                                             <FaRoad className="text-india-blue-500" />
                                             {route.distance}
@@ -143,14 +143,14 @@ const PopularRoutes = () => {
                                 <div className="flex items-center justify-between">
                                     <div>
                                         <span className="text-gray-400 text-xs">Starting from</span>
-                                        <div className="text-india-blue-800 font-bold text-xl flex items-center">
+                                        <div className="text-india-blue-800 font-bold text-lg sm:text-xl">
                                             {route.price}
                                         </div>
                                     </div>
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="px-5 py-2 bg-gradient-to-r from-india-saffron-500 to-india-saffron-600 text-white font-bold text-sm rounded-full shadow-md hover:shadow-lg transition-all"
+                                        className="px-4 sm:px-5 py-2 bg-gradient-to-r from-india-saffron-500 to-india-saffron-600 text-white font-bold text-xs sm:text-sm rounded-full shadow-md hover:shadow-lg transition-all min-h-[36px]"
                                     >
                                         Book Now
                                     </motion.button>
