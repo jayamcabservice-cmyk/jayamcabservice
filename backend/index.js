@@ -48,6 +48,15 @@ app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/history', historyRoutes);
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    message: 'Jayam Cab Service API is running',
+    endpoints: ['/api/auth', '/api/upload', '/api/packages', '/api/vehicles', '/api/bookings', '/api/history']
+  });
+});
+
 // Health check route
 app.get('/api/health', (req, res) => {
   res.json({ 
