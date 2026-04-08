@@ -25,6 +25,8 @@ app.use(cors({
     'http://localhost:5175',
     'http://localhost:4173',
     'https://travel-kqnc.onrender.com',
+    'https://www.jayamcabservice.com',
+    'https://jayamcabservice.com',
     /\.onrender\.com$/,
   ],
   credentials: true,
