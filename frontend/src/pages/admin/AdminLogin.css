@@ -413,5 +413,11 @@
 
     .auth-wrapper .text p { display: none; }
     .auth-wrapper .text h2 { font-size: 1.8rem; margin: 0.5rem 0; }
-    .auth-wrapper .img img { display: none; }
+    .auth-wrapper .img img { 
+        display: block;
+        width: 110px;
+        min-width: unset;
+        margin: 0.5rem auto 0;
+        filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+    }
 }

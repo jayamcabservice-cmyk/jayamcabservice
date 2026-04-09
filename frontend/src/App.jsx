@@ -12,8 +12,6 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import BookingPage from './pages/BookingPage';
 import AdminLogin from './pages/admin/AdminLogin';
-import AdminPinVerification from './pages/admin/AdminPinVerification';
-
 // Admin pages
 import AdminLayout from './components/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -32,28 +30,9 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-// PIN Verification Component - checks if admin has verified PIN
-const RequirePin = ({ children }) => {
-  const isPinVerified = sessionStorage.getItem('adminPinVerified');
-  
-  if (!isPinVerified) {
-    return <Navigate to="/admin/verify" replace />;
-  }
-  
-  return children;
-};
-
 // Main Layout for public pages
 const MainLayout = () => {
   const location = useLocation();
-  
-  // Clear PIN verification when on public pages
-  React.useEffect(() => {
-    // Only clear if not on admin routes
-    if (!location.pathname.startsWith('/admin')) {
-      sessionStorage.removeItem('adminPinVerified');
-    }
-  }, [location.pathname]);
   
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -82,15 +61,7 @@ function App() {
         </Route>
 
         {/* Admin Routes */}
-        <Route path="/admin/verify" element={
-          <AdminPinVerification />
-        } />
-        
-        <Route path="/admin/login" element={
-          <RequirePin>
-            <AdminLogin />
-          </RequirePin>
-        } />
+        <Route path="/admin/login" element={<AdminLogin />} />
         
         <Route path="/admin" element={
           <ProtectedRoute>

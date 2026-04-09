@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const http = require('http');
+const { Server } = require('socket.io');
 
 // Import routes
 const authRoutes = require('./routes/auth');
@@ -15,7 +17,36 @@ const historyRoutes = require('./routes/history');
 require('./config/firebase');
 
 const app = express();
+const server = http.createServer(app);
 const PORT = process.env.PORT || 5001;
+
+// Initialize Socket.io
+const io = new Server(server, {
+  cors: {
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'http://localhost:5175',
+      'http://localhost:4173',
+      'https://travel-kqnc.onrender.com',
+      'https://www.jayamcabservice.com',
+      'https://jayamcabservice.com',
+      /\.onrender\.com$/,
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    credentials: true,
+  }
+});
+
+// Expose io to controllers via request or app
+app.set('io', io);
+
+io.on('connection', (socket) => {
+  console.log(`🔌 Client connected: ${socket.id}`);
+  socket.on('disconnect', () => {
+    console.log(`❌ Client disconnected: ${socket.id}`);
+  });
+});
 
 // Middleware
 app.use(cors({
@@ -100,9 +131,10 @@ app.use((req, res) => {
   });
 });
 
-// Start server
-app.listen(PORT, () => {
+// Start server (using http server instead of express directly)
+server.listen(PORT, () => {
   console.log(`🚀 Backend running at http://localhost:${PORT}`);
+  console.log(`🔌 WebSocket server active`);
   console.log(`📦 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log('\nAvailable endpoints:');
   console.log('  Auth:     POST /api/auth/register, /api/auth/login');

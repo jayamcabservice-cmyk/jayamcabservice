@@ -18,6 +18,15 @@ const getMultipartHeaders = () => {
   };
 };
 
+// ─── GLOBAL CACHE ───────────────────────────────────────────────────────────
+// Holds in-memory data to prevent flashing when switching Tabs
+export const apiCache = {
+  packages: null,
+  vehicles: null,
+  bookings: null,
+  dashboard: null
+};
+
 // ─── AUTHENTICATION ─────────────────────────────────────────────────────────
 
 export const registerAdmin = (data) =>

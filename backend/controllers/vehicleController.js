@@ -129,6 +129,12 @@ const createVehicle = async (req, res) => {
       req.user
     );
 
+    // Emit websocket update
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('data_updated', { entity: 'vehicles' });
+    }
+
     res.status(201).json({
       message: 'Vehicle created successfully',
       id: docRef.id,
@@ -199,6 +205,12 @@ const updateVehicle = async (req, res) => {
       req.user
     );
 
+    // Emit websocket update
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('data_updated', { entity: 'vehicles' });
+    }
+
     res.json({
       message: 'Vehicle updated successfully',
       id,
@@ -242,6 +254,12 @@ const deleteVehicle = async (req, res) => {
       vehicleData.imageUrl,
       req.user
     );
+
+    // Emit websocket update
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('data_updated', { entity: 'vehicles' });
+    }
 
     res.json({
       message: 'Vehicle deleted successfully',

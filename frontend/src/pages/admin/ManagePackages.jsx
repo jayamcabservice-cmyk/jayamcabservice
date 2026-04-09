@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2, Eye, EyeOff, Search, MapPin, X, Loader2 } from 'lucide-react';
-import { fetchPackages, createPackage, updatePackage, deletePackage } from '../../services/api';
+import { fetchPackages, createPackage, updatePackage, deletePackage, apiCache } from '../../services/api';
+import { useDataSync } from '../../hooks/useDataSync';
 import ImageUpload from '../../components/admin/ImageUpload';
 import ConfirmDialog from '../../components/admin/ConfirmDialog';
-import { broadcastUpdate } from '../../hooks/useDataSync';
 
 const EMPTY_FORM = {
     title: '', 
@@ -13,14 +13,14 @@ const EMPTY_FORM = {
     imageUrl: null, 
     thumbnailUrl: '',
     publicId: '',
-    category: 'heritage', 
+    category: 'local', 
     emoji: '🗺️', 
     status: 'active'
 };
 
 const ManagePackages = () => {
-    const [packages, setPackages] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [packages, setPackages] = useState(apiCache.packages || []);
+    const [loading, setLoading] = useState(!apiCache.packages);
     const [searchTerm, setSearchTerm] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [editItem, setEditItem] = useState(null);
@@ -32,19 +32,25 @@ const ManagePackages = () => {
     // Required fields: title, location, price, imageUrl
     const isFormValid = form.title.trim() && form.location.trim() && form.price && form.imageUrl;
 
-    const load = async () => {
-        setLoading(true);
+    const load = async (silent = false) => {
+        if (!silent && !apiCache.packages) setLoading(true);
         try {
             const data = await fetchPackages();
-            setPackages(data.packages || []);
+            const arr = data.packages || [];
+            apiCache.packages = arr;
+            setPackages(arr);
         } catch (error) {
             console.error('Failed to load packages:', error);
         } finally {
-            setLoading(false);
+            if (!silent && !apiCache.packages) setLoading(false);
+            else setLoading(false);
         }
     };
 
     useEffect(() => { load(); }, []);
+    
+    // ── Real-time sync via WebSocket ──
+    useDataSync(() => load(true), 'packages');
 
     const openAdd = () => { setForm(EMPTY_FORM); setEditItem(null); setShowModal(true); };
     const openEdit = (pkg) => { 
@@ -111,7 +117,6 @@ const ManagePackages = () => {
 
         // ── Background API call ──
         updatePackage(id, { status: newStatus })
-            .then(() => broadcastUpdate('packages'))  // notify other tabs
             .catch(() => {
                 // Rollback on failure
                 setPackages(ps => ps.map(p => p.id === id ? { ...p, status: currentStatus } : p));
@@ -256,8 +261,11 @@ const ManagePackages = () => {
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
                                 <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
                                     className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-400 bg-white">
-                                    {['heritage', 'beach', 'mountain', 'adventure', 'wildlife', 'spiritual'].map(c => (
-                                        <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>
+                                    {[
+                                        { id: 'local', label: 'Local' },
+                                        { id: 'all_india', label: 'All India Tours' }
+                                    ].map(c => (
+                                        <option key={c.id} value={c.id}>{c.label}</option>
                                     ))}
                                 </select>
                             </div>

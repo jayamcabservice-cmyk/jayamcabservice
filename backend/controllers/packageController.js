@@ -123,6 +123,12 @@ const createPackage = async (req, res) => {
       req.user
     );
 
+    // Emit websocket update
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('data_updated', { entity: 'packages' });
+    }
+
     res.status(201).json({
       message: 'Package created successfully',
       id: docRef.id,
@@ -187,6 +193,12 @@ const updatePackage = async (req, res) => {
       req.user
     );
 
+    // Emit websocket update
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('data_updated', { entity: 'packages' });
+    }
+
     res.json({
       message: 'Package updated successfully',
       id,
@@ -230,6 +242,12 @@ const deletePackage = async (req, res) => {
       packageData.imageUrl,
       req.user
     );
+
+    // Emit websocket update
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('data_updated', { entity: 'packages' });
+    }
 
     res.json({
       message: 'Package deleted successfully',

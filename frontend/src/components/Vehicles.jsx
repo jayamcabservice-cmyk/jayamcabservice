@@ -106,7 +106,7 @@ const Vehicles = () => {
                 </div>
 
                 {/* Vehicles Grid */}
-                <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {filteredVehicles.map((vehicle, index) => (
                         <div
                             key={vehicle.id}
@@ -118,26 +118,37 @@ const Vehicles = () => {
                             className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group"
                         >
                             {/* Image Section */}
-                            <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                                <motion.img
-                                    src={vehicle.displayImage}
-                                    alt={vehicle.name}
-                                    loading="lazy"
-                                    className="w-full h-full object-cover transition-all duration-700"
-                                    whileHover={{ scale: 1.1 }}
-                                    onError={e => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/600x400?text=Vehicle'; }}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                            <div className="relative h-48 sm:h-56 md:h-64 [perspective:1000px] group/img z-20">
+                                <div className="w-full h-full relative transition-transform duration-700 [transform-style:preserve-3d] group-hover/img:[transform:rotateY(180deg)]">
+                                    {/* Front Face */}
+                                    <div className="absolute inset-0 [backface-visibility:hidden] overflow-hidden">
+                                        <motion.img
+                                            src={vehicle.displayImage}
+                                            alt={vehicle.name}
+                                            loading="lazy"
+                                            className="w-full h-full object-cover"
+                                            onError={e => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/600x400?text=Vehicle'; }}
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"></div>
 
-                                {/* Vehicle Icon Badge */}
-                                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-                                    <span className="text-3xl">{vehicle.icon}</span>
-                                </div>
+                                        {/* Vehicle Icon Badge */}
+                                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+                                            <span className="text-3xl">{vehicle.icon}</span>
+                                        </div>
 
-                                {/* Price Badge */}
-                                <div className="absolute bottom-4 left-4">
-                                    <div className="bg-india-saffron-500 text-white px-4 py-2 rounded-full shadow-lg">
-                                        <span className="font-bold text-lg">{vehicle.displayPrice}</span>
+                                        {/* Price Badge */}
+                                        <div className="absolute bottom-4 left-4">
+                                            <div className="bg-india-saffron-500 text-white px-4 py-2 rounded-full shadow-lg">
+                                                <span className="font-bold text-lg">{vehicle.displayPrice}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Back Face */}
+                                    <div className="absolute inset-0 w-full h-full [transform:rotateY(180deg)] [backface-visibility:hidden] bg-gradient-to-br from-india-blue-800 to-india-blue-900 border-b-4 border-india-saffron-500 text-white p-4 sm:p-6 flex flex-col justify-center items-center text-center shadow-inner overflow-hidden">
+
+                                        <p className="text-xs sm:text-sm leading-relaxed text-gray-100 overflow-y-auto pr-1">{vehicle.description || `Experience superior comfort and safety with our ${vehicle.name} rental service.`}</p>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +159,6 @@ const Vehicles = () => {
                                     <div>
                                         <h3 className="text-2xl font-bold text-india-blue-800">{vehicle.name}</h3>
                                         {vehicle.type && <p className="text-gray-600 text-sm capitalize">{vehicle.type} · {vehicle.category}</p>}
-                                        {vehicle.description && <p className="text-gray-500 text-xs mt-1">{vehicle.description}</p>}
                                     </div>
                                 </div>
 

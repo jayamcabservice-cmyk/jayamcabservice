@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import useIntersectionReveal from '../hooks/useIntersectionReveal';
 import { submitBooking } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 // ─── Distance Table (approx km between Maharashtra cities) ───────────────────
 const DISTANCES = {
@@ -211,6 +212,7 @@ const Row = ({ label, value, highlight }) => (
 
 // ─── Main BookingForm Component ────────────────────────────────────────────────
 const BookingForm = ({ packageInfo = null }) => {
+    const navigate = useNavigate();
     const isPackageMode = !!packageInfo;
 
     const [tripType, setTripType] = useState('oneWay');
@@ -390,9 +392,9 @@ const BookingForm = ({ packageInfo = null }) => {
                     <p className="text-gray-500 mb-6">
                         Your booking request has been saved and sent via WhatsApp. Our team will contact you shortly at <strong>{formData.phone}</strong>.
                     </p>
-                    <button onClick={() => setSubmitted(false)}
+                    <button onClick={() => isPackageMode ? navigate('/packages') : setSubmitted(false)}
                         className="px-6 py-3 bg-india-blue-600 text-white font-semibold rounded-full hover:bg-india-blue-700 transition-colors">
-                        Make Another Booking
+                        {isPackageMode ? 'Back to Tour Packages' : 'Make Another Booking'}
                     </button>
                 </div>
             </section>

@@ -1,26 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Calendar, MapPin, CheckCircle, XCircle, Loader2, Trash2, Package, Car } from 'lucide-react';
-import { fetchBookings, updateBookingStatus, deleteBooking } from '../../services/api';
+import { fetchBookings, updateBookingStatus, deleteBooking, apiCache } from '../../services/api';
 import ConfirmDialog from '../../components/admin/ConfirmDialog';
+import { useDataSync } from '../../hooks/useDataSync';
 
 const ManageBookings = () => {
-    const [bookings, setBookings] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [bookings, setBookings] = useState(apiCache.bookings || []);
+    const [loading, setLoading] = useState(!apiCache.bookings);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterType, setFilterType] = useState('all'); // 'all' | 'ride' | 'package'
     const [confirmId, setConfirmId] = useState(null);
 
-    const load = () => {
-        setLoading(true);
+    const load = (silent = false) => {
+        if (!silent && !apiCache.bookings) setLoading(true);
         fetchBookings()
             .then(data => {
-                setBookings(Array.isArray(data) ? data : (data?.bookings || []));
-                setLoading(false);
+                const arr = Array.isArray(data) ? data : (data?.bookings || []);
+                apiCache.bookings = arr;
+                setBookings(arr);
+                if (!silent && !apiCache.bookings) setLoading(false);
+                else setLoading(false);
             })
-            .catch(() => setLoading(false));
+            .catch(() => {
+                if (!silent) setLoading(false);
+            });
     };
 
     useEffect(() => { load(); }, []);
+
+    // ── Real-time sync via WebSocket ──
+    useDataSync(() => load(true), 'bookings');
 
     const handleStatus = async (id, status) => {
         await updateBookingStatus(id, status);

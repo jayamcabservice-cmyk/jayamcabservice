@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2, Search, X, Loader2, Users, Briefcase, Eye, EyeOff } from 'lucide-react';
-import { fetchVehicles, createVehicle, updateVehicle, deleteVehicle } from '../../services/api';
-import { broadcastUpdate } from '../../hooks/useDataSync';
+import { fetchVehicles, createVehicle, updateVehicle, deleteVehicle, apiCache } from '../../services/api';
+import { useDataSync } from '../../hooks/useDataSync';
+
 import ImageUpload from '../../components/admin/ImageUpload';
 import ConfirmDialog from '../../components/admin/ConfirmDialog';
 
@@ -20,8 +21,8 @@ const EMPTY_FORM = {
 };
 
 const ManageVehicles = () => {
-    const [vehicles, setVehicles] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [vehicles, setVehicles] = useState(apiCache.vehicles || []);
+    const [loading, setLoading] = useState(!apiCache.vehicles);
     const [searchTerm, setSearchTerm] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [editItem, setEditItem] = useState(null);
@@ -33,19 +34,25 @@ const ManageVehicles = () => {
     // Form is valid when name, pricePerKm, and an image are provided
     const isFormValid = form.name?.trim() && form.pricePerKm?.trim() && form.imageUrl;
 
-    const load = async () => {
-        setLoading(true);
+    const load = async (silent = false) => {
+        if (!silent && !apiCache.vehicles) setLoading(true);
         try {
             const data = await fetchVehicles();
-            setVehicles(data.vehicles || []);
+            const arr = data.vehicles || [];
+            apiCache.vehicles = arr;
+            setVehicles(arr);
         } catch (error) {
             console.error('Failed to load vehicles:', error);
         } finally {
-            setLoading(false);
+            if (!silent && !apiCache.vehicles) setLoading(false);
+            else setLoading(false);
         }
     };
 
     useEffect(() => { load(); }, []);
+
+    // ── Real-time sync via WebSocket ──
+    useDataSync(() => load(true), 'vehicles');
 
     const openAdd = () => { setForm(EMPTY_FORM); setEditItem(null); setShowModal(true); };
     const openEdit = (v) => { 
@@ -133,7 +140,6 @@ const ManageVehicles = () => {
 
         // ── Background API call ──
         updateVehicle(id, { status: newStatus })
-            .then(() => broadcastUpdate('vehicles'))   // notify other tabs
             .catch(() => {
                 // Rollback on failure
                 setVehicles(vs => vs.map(v => v.id === id ? { ...v, status: currentStatus } : v));

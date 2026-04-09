@@ -187,10 +187,8 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
 
     const filters = [
         { name: 'All Packages', value: 'all' },
-        { name: 'Beach', value: 'beach' },
-        { name: 'Mountain', value: 'mountain' },
-        { name: 'Heritage', value: 'heritage' },
-        { name: 'Adventure', value: 'adventure' },
+        { name: 'Local', value: 'local' },
+        { name: 'All India Tours', value: 'all_india' },
     ];
 
     const filteredPackages = filter === 'all'
@@ -225,6 +223,9 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                         {type === 'maharashtra'
                             ? 'Most booked local travel routes and tour packages within Maharashtra'
                             : 'Experience the best of India with our carefully curated tour packages across different states'}
+                    </p>
+                    <p className="mt-4 text-sm font-semibold text-red-600 bg-red-50 py-1.5 px-4 rounded-full border border-red-100 inline-block">
+                        * Packages are customizable to your choice. Send an enquiry!
                     </p>
                 </div>
 
@@ -269,27 +270,34 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                         className="package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group relative"
                                     >
                                         {/* Image */}
-                                        <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                                            <motion.img
-                                                src={pkg.image}
-                                                alt={pkg.title}
-                                                loading="lazy"
-                                                className="w-full h-full object-cover transition-all duration-700"
-                                                whileHover={{ scale: 1.15, filter: "brightness(1.1)" }}
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                                        <div className="relative h-48 sm:h-56 md:h-64 [perspective:1000px] group/img z-20">
+                                            <div className="w-full h-full relative transition-transform duration-700 [transform-style:preserve-3d] group-hover/img:[transform:rotateY(180deg)]">
+                                                {/* Front Face */}
+                                                <div className="absolute inset-0 [backface-visibility:hidden] overflow-hidden">
+                                                    <motion.img
+                                                        src={pkg.image}
+                                                        alt={pkg.title}
+                                                        loading="lazy"
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none"></div>
 
-                                            <motion.div
-                                                className="absolute inset-0 bg-gradient-to-br from-india-saffron-500/40 via-transparent to-india-blue-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                                            />
+                                                    <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-2.5 sm:px-3 py-1 rounded-full shadow-lg">
+                                                        <span className="text-xl sm:text-2xl">{pkg.emoji}</span>
+                                                    </div>
+                                                    <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+                                                        <span className="text-white/90 text-xs sm:text-sm font-medium bg-india-blue-600/80 backdrop-blur-sm px-2.5 sm:px-3 py-1 rounded-full shadow-lg">
+                                                            {pkg.duration}
+                                                        </span>
+                                                    </div>
+                                                </div>
 
-                                            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-2.5 sm:px-3 py-1 rounded-full shadow-lg">
-                                                <span className="text-xl sm:text-2xl">{pkg.emoji}</span>
-                                            </div>
-                                            <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
-                                                <span className="text-white/90 text-xs sm:text-sm font-medium bg-india-blue-600/80 backdrop-blur-sm px-2.5 sm:px-3 py-1 rounded-full shadow-lg">
-                                                    {pkg.duration}
-                                                </span>
+                                                {/* Back Face */}
+                                                <div className="absolute inset-0 w-full h-full [transform:rotateY(180deg)] [backface-visibility:hidden] bg-gradient-to-br from-india-blue-800 to-india-blue-900 border-b-4 border-india-saffron-500 text-white p-4 sm:p-6 flex flex-col justify-center items-center text-center shadow-inner overflow-hidden">
+
+                                                    <p className="text-xs sm:text-sm leading-relaxed text-gray-100 overflow-y-auto pr-1">{pkg.description || 'Customizable tour package. Send us an enquiry to learn more!'}</p>
+                                                
+                                                </div>
                                             </div>
                                         </div>
 
@@ -300,7 +308,6 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                                     {pkg.title}
                                                 </h3>
                                                 <p className="text-sm sm:text-base text-gray-600 mb-2 group-hover:text-gray-700 transition-colors line-clamp-1">{pkg.location}</p>
-                                                <p className="text-gray-500 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">{pkg.description}</p>
 
                                                 <div className="flex items-center justify-between mt-4 sm:mt-5 md:mt-6">
                                                     <div>
@@ -309,7 +316,7 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                                             {pkg.price}
                                                         </p>
                                                     </div>
-                                                    <Link to="/booking">
+                                                    <Link to={`/booking?package=${encodeURIComponent(pkg.title || '')}&price=${String(pkg.price || '').replace(/[^0-9.]/g, '')}&emoji=${encodeURIComponent(pkg.emoji || '')}&location=${encodeURIComponent(pkg.location || '')}`}>
                                                         <motion.button
                                                             whileHover={{ scale: 1.08, boxShadow: "0 10px 25px rgba(0, 86, 214, 0.3)" }}
                                                             whileTap={{ scale: 0.95 }}
@@ -399,7 +406,6 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                                 {pkg.title}
                                             </h3>
                                             <p className="text-sm text-gray-600 mb-1.5 group-hover:text-gray-700 transition-colors">{pkg.location}</p>
-                                            <p className="text-gray-500 text-xs sm:text-sm mb-3 sm:mb-4">{pkg.description}</p>
 
                                             <div className="flex items-center justify-between mt-6">
                                                 <div>
@@ -491,7 +497,6 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                                 {pkg.title}
                                             </h3>
                                             <p className="text-gray-600 mb-2 group-hover:text-gray-700 transition-colors">{pkg.location}</p>
-                                            <p className="text-gray-500 text-sm mb-4">{pkg.description}</p>
 
                                             <div className="flex items-center justify-between mt-6">
                                                 <div>

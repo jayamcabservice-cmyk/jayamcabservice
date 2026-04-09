@@ -1,15 +1,15 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, PhoneAuthProvider } from 'firebase/auth';
 
-// Firebase configuration for travelapp-8e120 project
+// Firebase configuration for jayamcabservice-e5840 project
 const firebaseConfig = {
-  apiKey: "AIzaSyDq6PSDQIrd5Tx6RkuicE7BQb652-rGAsY",
-  authDomain: "travelapp-8e120.firebaseapp.com",
-  projectId: "travelapp-8e120",
-  storageBucket: "travelapp-8e120.firebasestorage.app",
-  messagingSenderId: "498930978814",
-  appId: "1:498930978814:web:8d38569c7ad5281ca73aaf",
-  measurementId: "G-6E206XNZ31"
+  apiKey: "AIzaSyCHHcbqZUJwewho4Rb-dQWJFN2qbZ5cl34",
+  authDomain: "jayamcabservice-e5840.firebaseapp.com",
+  projectId: "jayamcabservice-e5840",
+  storageBucket: "jayamcabservice-e5840.firebasestorage.app",
+  messagingSenderId: "201379605901",
+  appId: "1:201379605901:web:64f3596a3161fbc79761c4",
+  measurementId: "G-JGGJJWM652"
 };
 
 // Initialize Firebase

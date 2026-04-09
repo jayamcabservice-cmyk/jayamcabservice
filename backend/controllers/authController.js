@@ -75,60 +75,52 @@ const registerAdmin = async (req, res) => {
   }
 };
 
-/**
- * Login admin user with email and password
- * Verifies credentials using Firebase Admin SDK and returns custom token
- */
 const loginWithEmail = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { idToken, email } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required' });
+    if (!idToken) {
+      return res.status(400).json({ error: 'Authentication token is required' });
     }
 
-    // Find admin by email in Firestore
-    const adminsSnapshot = await db.collection('admins')
-      .where('email', '==', email)
-      .limit(1)
-      .get();
-
-    if (adminsSnapshot.empty) {
-      console.log('❌ Admin not found for email:', email);
-      return res.status(401).json({ error: 'Invalid credentials' });
+    // securely verify the token using Firebase Admin SDK
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const uid = decodedToken.uid;
+    
+    const userRecord = await auth.getUser(uid);
+    if (!userRecord || userRecord.disabled) {
+      return res.status(401).json({ error: 'User account is disabled' });
     }
 
-    const adminDoc = adminsSnapshot.docs[0];
-    const adminData = adminDoc.data();
-    const uid = adminDoc.id;
+    // Auto-sync: Check if admin exists in Firestore. If not, auto-create!
+    const adminRef = db.collection('admins').doc(uid);
+    const adminDoc = await adminRef.get();
 
-    // Verify user exists and is not disabled
-    try {
-      const userRecord = await auth.getUser(uid);
-      
-      if (!userRecord || userRecord.disabled) {
-        return res.status(401).json({ error: 'User account is disabled' });
-      }
-      
-    } catch (verifyError) {
-      console.error('User verification failed:', verifyError.message);
-      return res.status(401).json({ error: 'Invalid credentials' });
+    if (!adminDoc.exists) {
+      console.log(`🪄 Auto-syncing manually added Firebase user to Firestore: ${email}`);
+      await adminRef.set({
+        uid: uid,
+        email: userRecord.email,
+        name: userRecord.displayName || 'Admin',
+        role: 'admin',
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        lastLogin: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    } else {
+      await adminRef.update({
+        lastLogin: admin.firestore.FieldValue.serverTimestamp(),
+      });
     }
 
-    // Update lastLogin timestamp in Firestore
-    await db.collection('admins').doc(uid).update({
-      lastLogin: admin.firestore.FieldValue.serverTimestamp(),
-    });
+    // Generate a fresh custom token if the client needs it, or just return success
+    const customToken = await auth.createCustomToken(uid);
 
-    // Generate custom token for this user
-    const customToken = await admin.auth().createCustomToken(uid);
-
-    console.log('✅ Login successful for:', email);
+    console.log('✅ Login successful for:', userRecord.email);
     
     res.json({
       message: 'Login successful',
       uid,
-      email: adminData.email,
+      email: userRecord.email,
       customToken,
     });
   } catch (error) {
