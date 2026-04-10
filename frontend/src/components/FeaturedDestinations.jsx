@@ -17,7 +17,7 @@ const FeaturedDestinations = () => {
         {
             id: 2,
             name: 'Marine Drive, Mumbai',
-            image: 'https://images.unsplash.com/photo-1570168907722-6d34a374f028?q=80&w=1200&auto=format&fit=crop',
+            image: 'https://images.unsplash.com/photo-1562979314-bee7453e911c?q=80&w=1200&auto=format&fit=crop',
             description: 'Queen\'s Necklace - Art Deco promenade',
             tag: 'City',
         },

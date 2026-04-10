@@ -110,10 +110,10 @@ const Vehicles = () => {
                     {filteredVehicles.map((vehicle, index) => (
                         <div
                             key={vehicle.id}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            /* initial={{ opacity: 0, y: 50 }} */
+                            /* whileInView={{ opacity: 1, y: 0 }} */
+                            /* viewport={{ once: true }} */
+                            /* transition={{ duration: 0.5, delay: index * 0.1 }} */
                             whileHover={{ y: -10 }}
                             className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group"
                         >

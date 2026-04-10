@@ -169,9 +169,9 @@ const ConfirmModal = ({ open, data, onConfirm, onCancel, submitting }) => {
                             {data.estimatedKm && (
                                 <Row label="Est. Distance" value={`~${data.estimatedKm} km`} />
                             )}
-                            {data.estimatedPrice && (
+                            {/* {data.estimatedPrice && (
                                 <Row label="Est. Price" value={`~₹${data.estimatedPrice.toLocaleString('en-IN')}`} highlight />
-                            )}
+                            )} */}
                         </>
                     )}
                     <Row label="Date" value={data.travelDate} />

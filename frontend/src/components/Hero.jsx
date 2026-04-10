@@ -159,9 +159,9 @@ const Hero = () => {
         <section className="relative h-screen flex items-center justify-center overflow-hidden z-0 bg-[#0a0f1c]">
             {/* Background Image */}
             <motion.div 
-                initial={{ scale: 1.3, opacity: 0 }}
-                animate={isVisible ? { scale: 1.1, opacity: 1 } : {}}
-                transition={{ duration: 1.5, ease: 'easeOut' }}
+                /* initial={{ scale: 1.3, opacity: 0 }} */
+                /* animate={isVisible ? { scale: 1.1, opacity: 1 } : {}} */
+                /* transition={{ duration: 1.5, ease: 'easeOut' }} */
                 className="absolute inset-0 z-[1] bg-cover bg-center bg-no-repeat"
                 style={{
                     backgroundImage: `url('https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2071&auto=format&fit=crop')`,
@@ -170,9 +170,9 @@ const Hero = () => {
             
             {/* Overlay */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={isVisible ? { opacity: 1 } : {}}
-                transition={{ duration: 1, delay: 0.3 }}
+                /* initial={{ opacity: 0 }} */
+                /* animate={isVisible ? { opacity: 1 } : {}} */
+                /* transition={{ duration: 1, delay: 0.3 }} */
                 className="absolute inset-0 z-[2] bg-gradient-to-r from-india-blue-900/80 via-india-blue-800/70 to-india-saffron-900/40"
             />
 
@@ -182,9 +182,9 @@ const Hero = () => {
                     <motion.div
                         key={i}
                         custom={i}
-                        initial="hidden"
-                        animate={animationComplete ? (showCards ? "exploded" : "vanish") : "visible"}
-                        variants={cardVariants}
+                        /* initial="hidden" */
+                        /* animate={animationComplete ? (showCards ? "exploded" : "vanish") : "visible"} */
+                        /* variants={cardVariants} */
                         className="absolute"
                         style={{ transformStyle: 'preserve-3d' }}
                     >
@@ -223,9 +223,9 @@ const Hero = () => {
 
             {/* Main Content */}
             <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                /* initial={{ opacity: 0, y: 30 }} */
+                /* animate={isVisible ? { opacity: 1, y: 0 } : {}} */
+                /* transition={{ duration: 0.8, delay: 0.5 }} */
                 className="relative z-[5] max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 text-center"
             >
                 <h1 className="text-3xl xs:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 flex flex-wrap items-baseline justify-center gap-x-2 sm:gap-x-4">
@@ -239,9 +239,9 @@ const Hero = () => {
                 </h1>
 
                 <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={isVisible ? { opacity: 1 } : {}}
-                    transition={{ duration: 0.6, delay: 0.7 }}
+                    /* initial={{ opacity: 0 }} */
+                    /* animate={isVisible ? { opacity: 1 } : {}} */
+                    /* transition={{ duration: 0.6, delay: 0.7 }} */
                     className="text-base xs:text-lg sm:text-xl md:text-2xl text-gray-200 mb-8 sm:mb-10 md:mb-12 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed"
                 >
                     Curated tour packages across India's most breathtaking destinations.
@@ -250,9 +250,9 @@ const Hero = () => {
                 </motion.p>
 
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.9 }}
+                    /* initial={{ opacity: 0, y: 20 }} */
+                    /* animate={isVisible ? { opacity: 1, y: 0 } : {}} */
+                    /* transition={{ duration: 0.6, delay: 0.9 }} */
                     className="flex flex-col xs:flex-row gap-3 sm:gap-4 justify-center items-center w-full xs:w-auto"
                 >
                     <motion.a
@@ -268,9 +268,9 @@ const Hero = () => {
 
             {/* Scroll Indicator */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 1 }}
+                /* initial={{ opacity: 0, y: 20 }} */
+                /* animate={isVisible ? { opacity: 1, y: 0 } : {}} */
+                /* transition={{ duration: 0.5, delay: 1 }} */
                 className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 z-[6]"
             >
                 <div className="w-6 h-10 sm:w-7 sm:h-12 border-2 border-white/60 rounded-full flex justify-center p-1.5 sm:p-2">

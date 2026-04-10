@@ -33,7 +33,7 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
             duration: '2 Days / 1 Night',
             price: '₹4,499',
             emoji: '🚌',
-            image: 'https://images.unsplash.com/photo-1590059390239-0d26a58f5a6b?q=80&w=800&auto=format&fit=crop',
+            image: 'https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=800&auto=format&fit=crop',
             category: 'adventure',
             description: 'Wine country to cultural capital journey',
         },
@@ -224,9 +224,11 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                             ? 'Most booked local travel routes and tour packages within Maharashtra'
                             : 'Experience the best of India with our carefully curated tour packages across different states'}
                     </p>
-                    <p className="mt-4 text-sm font-semibold text-red-600 bg-red-50 py-1.5 px-4 rounded-full border border-red-100 inline-block">
-                        * Packages are customizable to your choice. Send an enquiry!
-                    </p>
+                    {!showHardcoded && (
+                        <p className="mt-4 text-sm font-semibold text-red-600 bg-red-50 py-1.5 px-4 rounded-full border border-red-100 inline-block">
+                            * Packages are customizable to your choice. Send an enquiry!
+                        </p>
+                    )}
                 </div>
 
                 {/* Backend Packages - Always show these on non-hardcoded pages */}
@@ -262,10 +264,10 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                 {filteredPackages.map((pkg, idx) => (
                                     <motion.div
                                         key={pkg.id || idx}
-                                        initial={{ opacity: 0, y: 50 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.6, delay: idx * 0.1 }}
+                                        /* initial={{ opacity: 0, y: 50 }} */
+                                        /* whileInView={{ opacity: 1, y: 0 }} */
+                                        /* viewport={{ once: true }} */
+                                        /* transition={{ duration: 0.6, delay: idx * 0.1 }} */
                                         whileHover={{ y: -15 }}
                                         className="package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group relative"
                                     >
@@ -351,10 +353,10 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                             {maharashtraRoutes.map((pkg) => (
                                 <motion.div
                                     key={pkg.id}
-                                    initial={{ opacity: 0, y: 50 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6 }}
+                                    /* initial={{ opacity: 0, y: 50 }} */
+                                    /* whileInView={{ opacity: 1, y: 0 }} */
+                                    /* viewport={{ once: true }} */
+                                    /* transition={{ duration: 0.6 }} */
                                     whileHover={{ y: -10 }}
                                     className="package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group relative"
                                 >
@@ -366,6 +368,7 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                             loading="lazy"
                                             className="w-full h-full object-cover transition-all duration-700"
                                             whileHover={{ scale: 1.15, filter: "brightness(1.1)" }}
+                                            onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop'; }}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
@@ -442,10 +445,10 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                             {indiaPackages.map((pkg) => (
                                 <motion.div
                                     key={pkg.id}
-                                    initial={{ opacity: 0, y: 50 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6 }}
+                                    /* initial={{ opacity: 0, y: 50 }} */
+                                    /* whileInView={{ opacity: 1, y: 0 }} */
+                                    /* viewport={{ once: true }} */
+                                    /* transition={{ duration: 0.6 }} */
                                     whileHover={{ y: -10 }}
                                     className="package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group relative"
                                 >

@@ -23,129 +23,20 @@ export const useIntersectionReveal = (preset = 'fadeUp', options = {}) => {
         children = false,
     } = options;
 
+    // Scroll triggered animations disabled per user request
     useEffect(() => {
         const el = ref.current;
         if (!el) return;
-
-        // Skip initial animation if already played in this session
-        if (once && hasAnimatedBefore) {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0) scale(1)';
-            return;
-        }
-
-        const observerOptions = {
-            root: null,
-            rootMargin: start.replace('top ', '-').replace('%', 'px') || '-100px',
-            threshold: 0.1,
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const targets = children ? Array.from(el.children) : [el];
-                    
-                    targets.forEach((target, index) => {
-                        const targetDelay = children ? index * stagger : 0;
-                        
-                        setTimeout(() => {
-                            switch (preset) {
-                                case 'fadeUp':
-                                    target.style.transition = `opacity ${duration}s ease-out, transform ${duration}s ease-out`;
-                                    target.style.opacity = '1';
-                                    target.style.transform = 'translateY(0)';
-                                    break;
-
-                                case 'fadeDown':
-                                    target.style.transition = `opacity ${duration}s ease-out, transform ${duration}s ease-out`;
-                                    target.style.opacity = '1';
-                                    target.style.transform = 'translateY(0)';
-                                    break;
-
-                                case 'fadeLeft':
-                                    target.style.transition = `opacity ${duration}s ease-out, transform ${duration}s ease-out`;
-                                    target.style.opacity = '1';
-                                    target.style.transform = 'translateX(0)';
-                                    break;
-
-                                case 'fadeRight':
-                                    target.style.transition = `opacity ${duration}s ease-out, transform ${duration}s ease-out`;
-                                    target.style.opacity = '1';
-                                    target.style.transform = 'translateX(0)';
-                                    break;
-
-                                case 'scaleIn':
-                                    target.style.transition = `opacity ${duration}s ease-out, transform ${duration}s ease-out`;
-                                    target.style.opacity = '1';
-                                    target.style.transform = 'scale(1)';
-                                    break;
-
-                                default:
-                                    target.style.transition = `opacity ${duration}s ease-out, transform ${duration}s ease-out`;
-                                    target.style.opacity = '1';
-                                    target.style.transform = 'translateY(0)';
-                            }
-                        }, (delay + targetDelay) * 1000);
-                    });
-
-                    if (once) {
-                        animationState.markAsPlayed(animationKey);
-                        observer.unobserve(el);
-                    }
-                } else if (!once) {
-                    // Reset styles when not in view
-                    const targets = children ? Array.from(el.children) : [el];
-                    targets.forEach((target) => {
-                        target.style.opacity = '0';
-                        switch (preset) {
-                            case 'fadeUp':
-                            case 'fadeDown':
-                                target.style.transform = 'translateY(60px)';
-                                break;
-                            case 'fadeLeft':
-                                target.style.transform = 'translateX(-80px)';
-                                break;
-                            case 'fadeRight':
-                                target.style.transform = 'translateX(80px)';
-                                break;
-                            case 'scaleIn':
-                                target.style.transform = 'scale(0.8)';
-                                break;
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
-
-        // Set initial styles
+        
+        // Just ensure opacity is 1 and no transform is applied, overriding any inline styles
+        // But since we are not setting it to 0 anymore, we can just do nothing or set to 1.
         const targets = children ? Array.from(el.children) : [el];
         targets.forEach((target) => {
-            target.style.opacity = '0';
-            switch (preset) {
-                case 'fadeUp':
-                case 'fadeDown':
-                    target.style.transform = 'translateY(60px)';
-                    break;
-                case 'fadeLeft':
-                    target.style.transform = 'translateX(-80px)';
-                    break;
-                case 'fadeRight':
-                    target.style.transform = 'translateX(80px)';
-                    break;
-                case 'scaleIn':
-                    target.style.transform = 'scale(0.8)';
-                    break;
-                default:
-                    target.style.transform = 'translateY(60px)';
-            }
+            target.style.opacity = '1';
+            target.style.transform = 'translateY(0) scale(1) translateX(0)';
+            target.style.transition = 'none';
         });
-
-        observer.observe(el);
-
-        return () => {
-            observer.disconnect();
-        };
-    }, [once, animationKey, hasAnimatedBefore, preset, duration, delay, stagger, children, start]);
+    }, [children]);
 
     return ref;
 };
