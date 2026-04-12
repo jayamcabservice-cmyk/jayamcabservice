@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import ContactForm from '../components/ContactForm';
+import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import useIntersectionReveal from '../hooks/useIntersectionReveal';
@@ -16,6 +17,15 @@ const ContactPage = React.memo(() => {
 
     return (
         <section ref={sectionRef} className="bg-gradient-to-b from-gray-50 to-white">
+            <SEO
+                title="Contact JAYAM Travels Nashik | Call +91 70305 71513 for Cab Booking"
+                description="Contact JAYAM Cab Service in Nashik. Office: Hirawadi, Nashik 422003. Phone: +91 70305 71513. Email: jayamcabservice@gmail.com. Book your ride today!"
+                keywords={[
+                    'jayam cab service contact', 'cab service nashik contact number',
+                    'nashik cab booking phone', 'jayam travels nashik address',
+                ]}
+                url="/contact"
+            />
             {/* Page Header */}
             <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-india-blue-800 via-india-saffron-600 to-india-blue-700 relative overflow-hidden z-0">
                 <div className="absolute inset-0 opacity-10">
@@ -26,10 +36,10 @@ const ContactPage = React.memo(() => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[5]">
                     <div ref={headerRef} className="text-center text-white">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4">
-                            Get In Touch
+                            Contact JAYAM Cab Service — Nashik
                         </h1>
                         <p className="text-base sm:text-lg md:text-xl text-gray-100 max-w-3xl mx-auto">
-                            We're here to help plan your perfect journey
+                            Book your ride or get in touch — we're here to help!
                         </p>
                     </div>
                 </div>
@@ -40,9 +50,9 @@ const ContactPage = React.memo(() => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div ref={cardsRef} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                         {[
-                            { icon: <FaPhone className="text-xl sm:text-3xl" />, title: 'Phone', info: '+91 98765 43210', subtitle: 'Mon-Sat 9am-8pm' },
-                            { icon: <FaEnvelope className="text-xl sm:text-3xl" />, title: 'Email', info: 'info@tstravels.com', subtitle: 'Online support' },
-                            { icon: <FaMapMarkerAlt className="text-xl sm:text-3xl" />, title: 'Address', info: 'Mumbai, Maharashtra', subtitle: 'Visit our office' },
+                            { icon: <FaPhone className="text-xl sm:text-3xl" />, title: 'Phone', info: '+91 70305 71513', subtitle: 'Mon-Sat 9am-8pm' },
+                            { icon: <FaEnvelope className="text-xl sm:text-3xl" />, title: 'Email', info: 'jayamcabservice@gmail.com', subtitle: 'Online support' },
+                            { icon: <FaMapMarkerAlt className="text-xl sm:text-3xl" />, title: 'Address', info: 'Hirawadi, Nashik', subtitle: 'Maharashtra 422003' },
                             { icon: <FaClock className="text-xl sm:text-3xl" />, title: 'Working Hours', info: '9:00 AM - 8:00 PM', subtitle: 'Mon to Saturday' },
                         ].map((item, index) => (
                             <motion.div
@@ -67,7 +77,7 @@ const ContactPage = React.memo(() => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div ref={reachHeadingRef} className="text-center mb-8 sm:mb-10 lg:mb-12">
                         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-india-blue-800 mb-3">
-                            How to Reach Us
+                            How to Reach Us in Nashik
                         </h2>
                         <p className="text-sm sm:text-base lg:text-xl text-gray-600">
                             Visit our office or connect with us online
@@ -81,14 +91,14 @@ const ContactPage = React.memo(() => {
                             className="rounded-2xl overflow-hidden shadow-2xl h-[280px] sm:h-[350px] lg:h-[450px]"
                         >
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.082177513327956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1644329952789!5m2!1sen!2sin"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3744.123456789!2d73.7667!3d20.0000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddeb1c3f5b1234%3A0x1234567890abcdef!2sHirawadi%2C%20Nashik%2C%20Maharashtra%20422003!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0 }}
                                 allowFullScreen=""
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
-                                title="JAYAM Travels Location"
+                                title="JAYAM Cab Service Location - Hirawadi, Nashik, Maharashtra"
                             />
                         </div>
 
@@ -110,8 +120,8 @@ const ContactPage = React.memo(() => {
                                         <div>
                                             <h4 className="font-bold text-gray-800 mb-1">By Air</h4>
                                             <p className="text-gray-600">
-                                                Chhatrapati Shivaji Maharaj International Airport (35 km away).
-                                                Take a taxi or metro to reach our office.
+                                                Nashik Ozar Airport (HAL Airport) is about 25 km away.
+                                                We offer airport pickup and drop services.
                                             </p>
                                         </div>
                                     </div>
@@ -123,8 +133,8 @@ const ContactPage = React.memo(() => {
                                         <div>
                                             <h4 className="font-bold text-gray-800 mb-1">By Train</h4>
                                             <p className="text-gray-600">
-                                                Mumbai Central Railway Station (5 km). Local trains available
-                                                connecting all parts of Mumbai.
+                                                Nashik Road Railway Station is 8 km from Hirawadi.
+                                                Local transport and our cabs are available from the station.
                                             </p>
                                         </div>
                                     </div>
@@ -136,15 +146,15 @@ const ContactPage = React.memo(() => {
                                         <div>
                                             <h4 className="font-bold text-gray-800 mb-1">By Road</h4>
                                             <p className="text-gray-600">
-                                                Well connected by state and private buses. Ample parking
-                                                available at our office premises.
+                                                Nashik is well connected via Mumbai-Agra Highway (NH-3).
+                                                Hirawadi is easily accessible from all parts of Nashik city.
                                             </p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <motion.a
-                                    href="https://maps.google.com/?q=Mumbai+Maharashtra"
+                                    href="https://maps.google.com/?q=Hirawadi,+Nashik,+Maharashtra+422003"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     whileHover={{ scale: 1.05 }}

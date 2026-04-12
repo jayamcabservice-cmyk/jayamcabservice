@@ -366,7 +366,7 @@ const BookingForm = ({ packageInfo = null }) => {
             setShowConfirm(false);
             setSubmitted(true);
 
-            window.open(`https://wa.me/917972732871?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/917030571513?text=${encodeURIComponent(msg)}`, '_blank');
         } catch (err) {
             console.error('Booking submit failed:', err);
             alert('Failed to submit booking. Please try WhatsApp directly.');

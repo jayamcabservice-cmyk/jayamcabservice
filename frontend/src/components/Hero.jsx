@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const Hero = () => {
     const isHardRefresh = typeof window !== 'undefined' && performance.getEntriesByType('navigation')[0]?.type === 'reload';
     const hasPlayedIntro = !isHardRefresh && typeof sessionStorage !== 'undefined' && sessionStorage.getItem('jayam_travel_hero_intro') === 'true';
-    
+
     const [displayText, setDisplayText] = useState('');
     const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -158,7 +158,7 @@ const Hero = () => {
     return (
         <section className="relative h-screen flex items-center justify-center overflow-hidden z-0 bg-[#0a0f1c]">
             {/* Background Image */}
-            <motion.div 
+            <motion.div
                 /* initial={{ scale: 1.3, opacity: 0 }} */
                 /* animate={isVisible ? { scale: 1.1, opacity: 1 } : {}} */
                 /* transition={{ duration: 1.5, ease: 'easeOut' }} */
@@ -167,7 +167,7 @@ const Hero = () => {
                     backgroundImage: `url('https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2071&auto=format&fit=crop')`,
                 }}
             />
-            
+
             {/* Overlay */}
             <motion.div
                 /* initial={{ opacity: 0 }} */
@@ -274,7 +274,7 @@ const Hero = () => {
                 className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 z-[6]"
             >
                 <div className="w-6 h-10 sm:w-7 sm:h-12 border-2 border-white/60 rounded-full flex justify-center p-1.5 sm:p-2">
-                    <motion.div 
+                    <motion.div
                         className="w-1 h-2 sm:w-1.5 sm:h-3 bg-white rounded-full"
                         animate={{ y: [0, 8, 0], opacity: [0.3, 0.8, 0.3] }}
                         transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}

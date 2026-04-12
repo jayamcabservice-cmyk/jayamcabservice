@@ -257,7 +257,7 @@ const NavbarDemo = () => {
                     <NavbarLogo />
                     <NavItems items={navItems} />
                     <a
-                        href="tel:+917972732871"
+                        href="tel:+917030571513"
                         className="call-blink relative flex items-center gap-2 px-5 py-2 rounded-full bg-green-500 hover:bg-green-600 text-white font-bold text-sm shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:scale-105 shrink-0"
                         aria-label="Call us now"
                     >

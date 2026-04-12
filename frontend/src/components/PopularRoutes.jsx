@@ -10,63 +10,63 @@ const PopularRoutes = () => {
 
     const routes = [
         {
-            from: 'Mumbai',
-            to: 'Goa',
-            distance: '590 km',
-            duration: '9-10 hrs',
-            price: '₹6,499',
-            image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=400&auto=format&fit=crop',
-            tag: 'Beach',
-            color: '#10B981',
-        },
-        {
-            from: 'Delhi',
-            to: 'Agra',
-            distance: '233 km',
-            duration: '3-4 hrs',
-            price: '₹2,799',
-            image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=400&auto=format&fit=crop',
-            tag: 'Heritage',
-            color: '#F59E0B',
-        },
-        {
-            from: 'Delhi',
-            to: 'Jaipur',
-            distance: '281 km',
-            duration: '4-5 hrs',
-            price: '₹3,299',
-            image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=400&auto=format&fit=crop',
-            tag: 'Royal',
-            color: '#EC4899',
-        },
-        {
-            from: 'Mumbai',
-            to: 'Lonavala',
-            distance: '83 km',
-            duration: '1.5-2 hrs',
-            price: '₹1,499',
-            image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=400&auto=format&fit=crop',
-            tag: 'Hill Station',
+            from: 'Nashik',
+            to: 'Pune',
+            distance: '210 km',
+            duration: '3.5-4 hrs',
+            price: '₹2,499',
+            image: 'https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=400&auto=format&fit=crop',
+            tag: 'Popular',
             color: '#3B82F6',
         },
         {
-            from: 'Bangalore',
-            to: 'Mysore',
-            distance: '144 km',
-            duration: '3-4 hrs',
-            price: '₹1,999',
-            image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=400&auto=format&fit=crop',
-            tag: 'Palace',
+            from: 'Nashik',
+            to: 'Mumbai',
+            distance: '167 km',
+            duration: '3-3.5 hrs',
+            price: '₹2,199',
+            image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=400&auto=format&fit=crop',
+            tag: 'Business',
             color: '#8B5CF6',
         },
         {
-            from: 'Delhi',
-            to: 'Manali',
-            distance: '530 km',
-            duration: '12-13 hrs',
-            price: '₹5,999',
+            from: 'Nashik',
+            to: 'Shirdi',
+            distance: '90 km',
+            duration: '1.5-2 hrs',
+            price: '₹1,299',
+            image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=400&auto=format&fit=crop',
+            tag: 'Pilgrimage',
+            color: '#F59E0B',
+        },
+        {
+            from: 'Nashik',
+            to: 'Aurangabad',
+            distance: '190 km',
+            duration: '3.5-4 hrs',
+            price: '₹2,399',
+            image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=400&auto=format&fit=crop',
+            tag: 'Heritage',
+            color: '#EC4899',
+        },
+        {
+            from: 'Nashik',
+            to: 'Lonavala',
+            distance: '260 km',
+            duration: '4.5-5 hrs',
+            price: '₹3,199',
+            image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=400&auto=format&fit=crop',
+            tag: 'Hill Station',
+            color: '#10B981',
+        },
+        {
+            from: 'Nashik',
+            to: 'Mahabaleshwar',
+            distance: '310 km',
+            duration: '6-7 hrs',
+            price: '₹3,999',
             image: 'https://images.unsplash.com/photo-1609137144813-7d9921338f24?q=80&w=400&auto=format&fit=crop',
-            tag: 'Adventure',
+            tag: 'Nature',
             color: '#06B6D4',
         },
     ];
@@ -81,10 +81,10 @@ const PopularRoutes = () => {
                     </div>
                     <div ref={headingRef}>
                         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-india-blue-800 mb-2 sm:mb-3">
-                            Popular Outstation Routes
+                            Popular Routes from Nashik
                         </h2>
                         <p className="text-sm sm:text-base text-gray-500 max-w-lg mx-auto">
-                            Most booked cab routes with transparent pricing and comfortable rides
+                            Most booked cab routes from Nashik with transparent pricing
                         </p>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaPhoneAlt } from 'react-icons/fa';
 
-const PHONE = '+917972732871';
+const PHONE = '+917030571513';
 const WHATSAPP = 'https://wa.me/917030571513';
 
 const FloatingWhatsApp = () => {

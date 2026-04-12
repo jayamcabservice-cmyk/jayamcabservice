@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Statistics from '../components/Statistics';
+import SEO from '../components/SEO';
 import useIntersectionReveal from '../hooks/useIntersectionReveal';
 
 const AboutPage = React.memo(() => {
@@ -12,6 +13,15 @@ const AboutPage = React.memo(() => {
 
     return (
         <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-50 to-white">
+            <SEO
+                title="About JAYAM Travels | Trusted Cab Service in Nashik Since 2010"
+                description="JAYAM Travels — Nashik's trusted cab service with 15+ years of experience. 10,000+ happy travelers. Professional drivers, 24/7 support & best prices."
+                keywords={[
+                    'about jayam travels', 'cab service nashik', 'trusted taxi nashik',
+                    'nashik travel company', 'jayam cab service history',
+                ]}
+                url="/about"
+            />
             {/* Page Header */}
             <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-india-blue-700 via-india-blue-600 to-india-blue-800 relative overflow-hidden z-0">
                 <div className="absolute inset-0 opacity-10">
@@ -22,10 +32,10 @@ const AboutPage = React.memo(() => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[5]">
                     <div ref={headerRef} className="text-center text-white">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4">
-                            About JAYAM Travels
+                            About JAYAM Travels — Nashik's Trusted Cab Service
                         </h1>
                         <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
-                            Your trusted partner for unforgettable journeys across India
+                            Your trusted partner for comfortable & affordable travel across Maharashtra
                         </p>
                     </div>
                 </div>
@@ -38,20 +48,20 @@ const AboutPage = React.memo(() => {
                         <div ref={storyRef}>
                             <h2 className="text-2xl sm:text-3xl font-bold text-india-blue-800 mb-4 sm:mb-6">Our Story</h2>
                             <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
-                                At JAYAM Travels, we believe that travel is more than just visiting new places—it's about creating lasting memories,
-                                experiencing diverse cultures, and discovering the extraordinary beauty that India has to offer.
+                                JAYAM Cab Service, based in Nashik, Maharashtra, has been providing reliable and affordable car rental and taxi services for over 15 years.
+                                We specialize in local cab service in Nashik, outstation trips to Pune, Mumbai, Shirdi, and tour packages across Maharashtra and India.
                             </p>
                             <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
-                                With over 15 years of experience in the travel industry, we've helped thousands of travelers explore India's
-                                most captivating destinations. From the snow-capped peaks of Kashmir to the sun-kissed beaches of Goa,
-                                from the royal palaces of Rajasthan to the serene backwaters of Kerala—we curate experiences that go beyond ordinary tourism.
+                                With a fleet of well-maintained vehicles — from hatchbacks to luxury coaches — and a team of professional, experienced drivers,
+                                we've served 10,000+ happy travelers. Whether it's a Nashik darshan, a pilgrimage to Trimbakeshwar, a business trip to Pune,
+                                or a family vacation to Goa — JAYAM Travels ensures a safe, comfortable, and transparent travel experience every time.
                             </p>
                         </div>
                         <div ref={missionRef}>
                             <h2 className="text-2xl sm:text-3xl font-bold text-india-blue-800 mb-4 sm:mb-6 mt-8 sm:mt-12">Our Mission</h2>
                             <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
-                                To provide exceptional, personalized travel experiences that showcase the rich cultural heritage,
-                                natural beauty, and warm hospitality of India while ensuring the highest standards of comfort, safety, and customer satisfaction.
+                                To be Nashik's most trusted cab service — delivering safe, affordable, and on-time car rental experiences
+                                with professional drivers, transparent pricing, and 24/7 customer support across Maharashtra and India.
                             </p>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ import TourPackages from '../components/TourPackages';
 import WhyChooseUs from '../components/WhyChooseUs';
 import InstagramGallery from '../components/InstagramGallery';
 import Testimonials from '../components/Testimonials';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useIntersectionReveal from '../hooks/useIntersectionReveal';
@@ -14,6 +15,17 @@ const Home = memo(() => {
 
     return (
         <>
+            <SEO
+                title="Best Cab Service in Nashik | Car Rental & Taxi Booking — JAYAM Travels"
+                description="Book affordable cab service in Nashik. Car rental, taxi to Pune, Shirdi, Mumbai & outstation trips across Maharashtra. 24/7 support. Call +91 70305 71513"
+                keywords={[
+                    'cab service nashik', 'car rental nashik', 'taxi service nashik',
+                    'nashik cab booking', 'best cab in nashik', 'nashik to pune cab',
+                    'nashik to mumbai taxi', 'nashik to shirdi cab', 'outstation cab nashik',
+                    'nashik taxi fare per km', 'cheap cab service nashik',
+                ]}
+                url="/"
+            />
             <Hero />
             <ModernSlider />
 

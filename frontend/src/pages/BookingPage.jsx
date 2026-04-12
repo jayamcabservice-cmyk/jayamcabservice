@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 // Lazy load all booking page components
 const BookingForm = lazy(() => import('../components/BookingForm'));
@@ -40,6 +41,22 @@ const BookingPage = React.memo(() => {
 
     return (
         <div>
+            <SEO
+                title={packageInfo
+                    ? `Book ${packageInfo.name} | Cab Booking Nashik — JAYAM Travels`
+                    : 'Book a Cab in Nashik Online | Instant Taxi Booking — JAYAM Travels'
+                }
+                description={packageInfo
+                    ? `Book ${packageInfo.name} package from Nashik. ${packageInfo.price ? `Price: ₹${packageInfo.price.toLocaleString('en-IN')}` : 'Get a custom quote'}. Comfortable ride, professional driver.`
+                    : 'Book your cab ride in Nashik online. Instant booking for local, outstation & airport transfers. Transparent pricing, no hidden charges.'
+                }
+                keywords={[
+                    'book cab nashik', 'online taxi booking nashik', 'nashik cab booking',
+                    'nashik to pune booking', 'outstation cab nashik booking',
+                    'nashik taxi fare per km', 'cab booking online nashik',
+                ]}
+                url="/booking"
+            />
             {/* Page Header */}
             <section className="py-24 bg-gradient-to-br from-india-blue-900 via-india-blue-700 to-india-saffron-600 relative overflow-hidden z-0">
                 <div className="absolute inset-0 opacity-10">

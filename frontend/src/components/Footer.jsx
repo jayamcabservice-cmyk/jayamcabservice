@@ -32,7 +32,7 @@ const Footer = () => {
                             <span className="text-india-saffron-400"> Travels</span>
                         </h3>
                         <p className="text-white/80 mb-4 text-sm leading-relaxed">
-                            Your trusted partner for unforgettable journeys across India. Experience the magic of incredible destinations.
+                            Nashik's trusted cab service. Affordable car rental, outstation trips, and tour packages across Maharashtra & India.
                         </p>
                         <div className="flex space-x-3">
                             {socialLinks.map((social) => (
@@ -84,17 +84,17 @@ const Footer = () => {
                             <li className="flex items-start">
                                 <FaMapMarkerAlt className="mt-1 mr-3 text-india-saffron-400 flex-shrink-0 text-sm" />
                                 <span className="text-white/80 text-sm">
-                                    123 Tourism Plaza, Connaught Place<br />
-                                    New Delhi, India - 110001
+                                    Hirawadi, Nashik<br />
+                                    Maharashtra 422003, India
                                 </span>
                             </li>
                             <li className="flex items-center">
                                 <FaPhone className="mr-3 text-india-saffron-400 flex-shrink-0 text-sm" />
-                                <span className="text-white/80 text-sm">+91 98765 43210</span>
+                                <span className="text-white/80 text-sm">+91 70305 71513</span>
                             </li>
                             <li className="flex items-center">
                                 <FaEnvelope className="mr-3 text-india-saffron-400 flex-shrink-0 text-sm" />
-                                <span className="text-white/80 text-sm">info@tstravels.com</span>
+                                <span className="text-white/80 text-sm">jayamcabservice@gmail.com</span>
                             </li>
                         </ul>
                     </div>

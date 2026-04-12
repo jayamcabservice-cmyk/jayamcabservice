@@ -1,10 +1,22 @@
 import React from 'react';
 import TourPackages from '../components/TourPackages';
+import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 
 const PackagesPage = React.memo(() => {
     return (
         <div>
+            <SEO
+                title="Tour Packages from Nashik | Maharashtra & All India Tours — JAYAM Travels"
+                description="Explore affordable tour packages from Nashik. Nashik-Mumbai, Nashik-Pune, Shirdi, Konkan & all India tours. Custom packages available. Book now!"
+                keywords={[
+                    'tour packages from nashik', 'nashik to mumbai package', 'nashik to pune cab',
+                    'nashik to shirdi tour', 'konkan tour from nashik', 'maharashtra tour package',
+                    'india tour packages nashik', 'nashik darshan package', 'outstation cab nashik',
+                    'nashik winery tour', 'family tour from nashik',
+                ]}
+                url="/packages"
+            />
             {/* Page Header */}
             <section className="py-20 bg-gradient-to-br from-india-blue-800 via-india-blue-700 to-india-saffron-600 relative overflow-hidden z-0">
                 <div className="absolute inset-0 opacity-10">
@@ -14,16 +26,13 @@ const PackagesPage = React.memo(() => {
                 </div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[5]">
                     <motion.div
-                        /* initial={{ opacity: 0, y: 30 }} */
-                        /* animate={{ opacity: 1, y: 0 }} */
-                        /* transition={{ duration: 0.6 }} */
                         className="text-center text-white"
                     >
                         <h1 className="text-5xl md:text-6xl font-bold mb-4">
-                            Tour Packages
+                            Tour Packages from Nashik
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto">
-                            Discover our complete collection of curated tours across India
+                            Affordable Maharashtra & all India tours — customized to your choice
                         </p>
                     </motion.div>
                 </div>
@@ -36,3 +45,4 @@ const PackagesPage = React.memo(() => {
 });
 
 export default PackagesPage;
+

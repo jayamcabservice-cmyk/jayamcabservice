@@ -1,0 +1,11 @@
+# JAYAM Cab Service — Robots.txt
+# https://www.jayamcabservice.com
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/login
+
+# Sitemap
+Sitemap: https://www.jayamcabservice.com/sitemap.xml
