@@ -45,10 +45,10 @@ const ManageBookings = () => {
 
     const getStatusClass = (status) => {
         switch (status) {
-            case 'confirmed':  return 'bg-green-100 text-green-800 border-green-200';
-            case 'cancelled':  return 'bg-red-100 text-red-800 border-red-200';
-            case 'completed':  return 'bg-blue-100 text-blue-800 border-blue-200';
-            default:           return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+            case 'confirmed': return 'bg-green-100 text-green-800 border-green-200';
+            case 'cancelled': return 'bg-red-100 text-red-800 border-red-200';
+            case 'completed': return 'bg-blue-100 text-blue-800 border-blue-200';
+            default: return 'bg-yellow-100 text-yellow-800 border-yellow-200';
         }
     };
 
@@ -76,8 +76,8 @@ const ManageBookings = () => {
         );
 
     const counts = {
-        all:     bookings.length,
-        ride:    bookings.filter(b => (b.type || 'ride') === 'ride').length,
+        all: bookings.length,
+        ride: bookings.filter(b => (b.type || 'ride') === 'ride').length,
         package: bookings.filter(b => b.type === 'package').length,
     };
 
@@ -96,8 +96,7 @@ const ManageBookings = () => {
             'Vehicle/Trip Type',
             'Passengers',
             'Est. Price',
-            'Status',
-            'Message'
+            'Status'
         ].join(',');
 
         const csvRows = filtered.map(b => {
@@ -148,9 +147,9 @@ const ManageBookings = () => {
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                     {[
-                        { key: 'all',     label: 'All',      count: counts.all },
-                        { key: 'ride',    label: '🚗 Rides',  count: counts.ride },
-                        { key: 'package', label: '📦 Pkgs',   count: counts.package },
+                        { key: 'all', label: 'All', count: counts.all },
+                        { key: 'ride', label: '🚗 Rides', count: counts.ride },
+                        { key: 'package', label: '📦 Pkgs', count: counts.package },
                     ].map(tab => (
                         <button key={tab.key} onClick={() => setFilterType(tab.key)}
                             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${filterType === tab.key ? 'bg-india-blue-600 text-white' : 'bg-white border border-gray-200 text-gray-600 hover:border-gray-300'}`}>
