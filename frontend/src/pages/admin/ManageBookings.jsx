@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Calendar, MapPin, CheckCircle, XCircle, Loader2, Trash2, Package, Car } from 'lucide-react';
+import { Search, Calendar, MapPin, CheckCircle, XCircle, Loader2, Trash2, Package, Car, Download } from 'lucide-react';
 import { fetchBookings, updateBookingStatus, deleteBooking, apiCache } from '../../services/api';
 import ConfirmDialog from '../../components/admin/ConfirmDialog';
 import { useDataSync } from '../../hooks/useDataSync';
@@ -81,6 +81,63 @@ const ManageBookings = () => {
         package: bookings.filter(b => b.type === 'package').length,
     };
 
+    const handleDownloadStats = () => {
+        if (!filtered || filtered.length === 0) return;
+
+        const headers = [
+            'ID',
+            'Type',
+            'Customer Name',
+            'Phone',
+            'Email',
+            'Pickup/Package Name',
+            'Destination',
+            'Travel Date',
+            'Vehicle/Trip Type',
+            'Passengers',
+            'Est. Price',
+            'Status',
+            'Message'
+        ].join(',');
+
+        const csvRows = filtered.map(b => {
+            const isPackage = b.type === 'package';
+            const pickupOrPackage = isPackage ? (b.packageName || '') : (b.pickup || '');
+            const destination = isPackage ? '' : (b.destination || '');
+            const vehicleOrTrip = isPackage ? '' : `${b.vehicleType || ''} ${b.tripType ? `(${b.tripType})` : ''}`;
+            const price = isPackage ? (b.packagePrice || '') : (b.estimatedPrice || '');
+
+            const escape = (str) => `"${(str || '').toString().replace(/"/g, '""')}"`;
+
+            return [
+                escape(b.id),
+                escape(b.type || 'ride'),
+                escape(b.customerName),
+                escape(b.phone),
+                escape(b.email),
+                escape(pickupOrPackage),
+                escape(destination),
+                escape(b.travelDate),
+                escape(vehicleOrTrip),
+                escape(b.passengers),
+                escape(price),
+                escape(b.status),
+                escape(b.message)
+            ].join(',');
+        });
+
+        const csvString = [headers, ...csvRows].join('\n');
+        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        const filterName = filterType === 'all' ? 'all' : filterType;
+        link.setAttribute('download', `jayam_cabs_bookings_${filterName}_${new Date().toISOString().slice(0, 10)}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return (
         <div className="space-y-6">
             {/* Header */}
@@ -89,7 +146,7 @@ const ManageBookings = () => {
                     <h2 className="text-2xl font-bold text-gray-800">Booking Enquiries</h2>
                     <p className="text-sm text-gray-500 mt-1">Review and manage incoming customer requests</p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                     {[
                         { key: 'all',     label: 'All',      count: counts.all },
                         { key: 'ride',    label: '🚗 Rides',  count: counts.ride },
@@ -100,6 +157,14 @@ const ManageBookings = () => {
                             {tab.label} ({tab.count})
                         </button>
                     ))}
+                    <button
+                        onClick={handleDownloadStats}
+                        disabled={filtered.length === 0}
+                        className="ml-auto sm:ml-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
+                        title="Download as CSV"
+                    >
+                        <Download size={14} /> Download Stats
+                    </button>
                 </div>
             </div>
 
