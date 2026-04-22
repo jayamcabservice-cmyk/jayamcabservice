@@ -71,7 +71,7 @@ const AdminLayout = () => {
                                 key={item.name}
                                 to={item.path}
                                 onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
-                                className={`flex items-center gap-2 sm:gap-3 px-3 py-2.5 rounded-lg transition-colors font-medium text-sm sm:text-base ${isActive
+                                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors font-medium text-base ${isActive
                                     ? 'bg-india-blue-50 text-india-blue-700'
                                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                                     }`}
@@ -79,8 +79,7 @@ const AdminLayout = () => {
                                 <span className={`${isActive ? 'text-india-blue-600' : 'text-gray-400'}`}>
                                     {item.icon}
                                 </span>
-                                <span className="hidden sm:inline">{item.name}</span>
-                                <span className="sm:hidden text-xs truncate flex-1">{item.name.split(' ')[0]}</span>
+                                <span>{item.name}</span>
                             </NavLink>
                         );
                     })}
@@ -92,19 +91,17 @@ const AdminLayout = () => {
                         href="/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors font-medium text-sm sm:text-base"
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors font-medium text-base"
                     >
                         <ExternalLink size={18} className="text-gray-400 shrink-0" />
-                        <span className="hidden sm:inline">View Live Site</span>
-                        <span className="sm:hidden text-xs">Live Site</span>
+                        <span>View Live Site</span>
                     </a>
                     <button 
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-2 sm:gap-3 px-3 py-2.5 mt-1 rounded-lg text-red-600 hover:bg-red-50 transition-colors font-medium text-sm sm:text-base"
+                        className="w-full flex items-center gap-3 px-3 py-2.5 mt-1 rounded-lg text-red-600 hover:bg-red-50 transition-colors font-medium text-base"
                     >
                         <LogOut size={18} className="text-red-400 shrink-0" />
-                        <span className="hidden sm:inline">Logout</span>
-                        <span className="sm:hidden text-xs">Logout</span>
+                        <span>Logout</span>
                     </button>
                 </div>
             </aside>

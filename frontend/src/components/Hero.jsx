@@ -156,7 +156,7 @@ const Hero = () => {
     };
 
     return (
-        <section className="relative h-screen flex items-center justify-center overflow-hidden z-0 bg-[#0a0f1c]">
+        <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden z-0 bg-[#0a0f1c]">
             {/* Background Image */}
             <motion.div
                 /* initial={{ scale: 1.3, opacity: 0 }} */

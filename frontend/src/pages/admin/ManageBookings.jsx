@@ -33,13 +33,17 @@ const ManageBookings = () => {
 
     const handleStatus = async (id, status) => {
         await updateBookingStatus(id, status);
-        setBookings(bs => bs.map(b => b.id === id ? { ...b, status } : b));
+        const next = bookings.map(b => b.id === id ? { ...b, status } : b);
+        apiCache.bookings = next;
+        setBookings(next);
     };
 
     const handleDelete = (id) => setConfirmId(id);
     const confirmDelete = async () => {
         await deleteBooking(confirmId);
-        setBookings(bs => bs.filter(b => b.id !== confirmId));
+        const next = bookings.filter(b => b.id !== confirmId);
+        apiCache.bookings = next;
+        setBookings(next);
         setConfirmId(null);
     };
 
@@ -184,9 +188,9 @@ const ManageBookings = () => {
                         <Loader2 className="animate-spin text-blue-500" size={32} />
                     </div>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left border-collapse">
-                            <thead>
+                    <div className="w-full">
+                        <table className="w-full text-left border-collapse flex flex-col lg:table">
+                            <thead className="hidden lg:table-header-group">
                                 <tr className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
                                     <th className="py-4 px-6 font-medium">Customer</th>
                                     <th className="py-4 px-6 font-medium">Trip / Package</th>
@@ -195,10 +199,10 @@ const ManageBookings = () => {
                                     <th className="py-4 px-6 font-medium text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-100 text-sm text-gray-700">
+                            <tbody className="divide-y divide-gray-200 lg:divide-gray-100 text-sm text-gray-700 flex flex-col lg:table-row-group">
                                 {filtered.length === 0 ? (
-                                    <tr>
-                                        <td colSpan="5" className="py-12 text-center text-gray-400">
+                                    <tr className="block lg:table-row text-center py-12">
+                                        <td colSpan="5" className="py-12 text-center text-gray-400 block lg:table-cell">
                                             No bookings found.
                                         </td>
                                     </tr>
@@ -207,9 +211,9 @@ const ManageBookings = () => {
                                     const price = formatPrice(b);
 
                                     return (
-                                        <tr key={b.id} className="hover:bg-gray-50/50 transition-colors">
+                                        <tr key={b.id} className="hover:bg-gray-50/50 transition-colors flex flex-col lg:table-row p-4 pb-5 lg:p-0 relative">
                                             {/* Customer */}
-                                            <td className="py-4 px-6">
+                                            <td className="py-1.5 lg:py-4 px-0 lg:px-6 block lg:table-cell">
                                                 <div className="font-medium text-gray-900">{b.customerName}</div>
                                                 <div className="text-xs text-gray-500 mt-0.5">{b.phone}</div>
                                                 {b.email && <div className="text-xs text-gray-400">{b.email}</div>}
@@ -223,7 +227,7 @@ const ManageBookings = () => {
                                             </td>
 
                                             {/* Trip Details */}
-                                            <td className="py-4 px-6">
+                                            <td className="py-2 lg:py-4 px-0 lg:px-6 block lg:table-cell">
                                                 {isPackage ? (
                                                     <>
                                                         <div className="font-semibold text-india-blue-800">
@@ -253,7 +257,7 @@ const ManageBookings = () => {
                                             </td>
 
                                             {/* Price */}
-                                            <td className="py-4 px-6">
+                                            <td className="py-1.5 lg:py-4 px-0 lg:px-6 block lg:table-cell">
                                                 {price ? (
                                                     <div>
                                                         <div className={`font-bold text-base ${price.color}`}>{price.label}</div>
@@ -268,15 +272,15 @@ const ManageBookings = () => {
                                             </td>
 
                                             {/* Status */}
-                                            <td className="py-4 px-6">
+                                            <td className="py-2 lg:py-4 px-0 lg:px-6 block lg:table-cell absolute top-4 right-4 lg:static">
                                                 <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${getStatusClass(b.status)}`}>
                                                     {b.status?.charAt(0).toUpperCase() + b.status?.slice(1) || 'Pending'}
                                                 </span>
                                             </td>
 
                                             {/* Actions */}
-                                            <td className="py-4 px-6 text-right">
-                                                <div className="flex items-center justify-end gap-2">
+                                            <td className="pt-4 lg:pt-0 pb-1 lg:pb-0 px-0 lg:py-4 lg:px-6 block lg:table-cell border-t border-gray-100 mt-2 lg:border-t-0 lg:mt-0 lg:text-right">
+                                                <div className="flex items-center justify-start lg:justify-end gap-3 lg:gap-2">
                                                     {b.status !== 'confirmed' && (
                                                         <button onClick={() => handleStatus(b.id, 'confirmed')}
                                                             className="p-1.5 text-green-600 hover:bg-green-50 border border-green-200 rounded-md text-xs font-medium flex items-center gap-1">

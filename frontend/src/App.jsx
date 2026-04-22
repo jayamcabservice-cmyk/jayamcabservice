@@ -30,12 +30,30 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+// ScrollToTop component to reset scroll position on route change
+const ScrollToTop = () => {
+  const { pathname, search, hash } = useLocation();
+  
+  React.useEffect(() => {
+    // 1. Immediate scroll upon route change
+    window.scrollTo(0, 0);
+    
+    // 2. Delayed scroll to overpower React lazy loading / Suspense layout shifts
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [pathname, search, hash]);
+  
+  return null;
+};
+
 // Main Layout for public pages
 const MainLayout = () => {
-  const location = useLocation();
-  
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-[100dvh] bg-white w-full max-w-[100vw] overflow-x-hidden">
+      <ScrollToTop />
       <Navbar />
       <main className="flex-grow">
         <Outlet />

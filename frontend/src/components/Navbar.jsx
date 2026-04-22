@@ -18,7 +18,14 @@ const navItems = [
    LOGO
 ────────────────────────────────────────────── */
 export const NavbarLogo = ({ visible, onClick }) => (
-    <Link to="/" onClick={onClick} className="relative z-20 flex items-center gap-0.5 shrink-0 select-none">
+    <Link 
+        to="/" 
+        onClick={(e) => {
+            window.scrollTo(0, 0);
+            if (onClick) onClick(e);
+        }} 
+        className="relative z-20 flex items-center gap-0.5 shrink-0 select-none"
+    >
         <span
             style={{ color: visible ? "#1e3a8a" : "#ffffff" }}
             className="font-black text-xl sm:text-2xl tracking-tight transition-colors duration-300"
@@ -100,7 +107,10 @@ export const NavItems = ({ items, className, onItemClick, visible }) => {
                         key={`link-${idx}`}
                         onMouseEnter={() => setHovered(idx)}
                         onMouseLeave={() => setHovered(null)}
-                        onClick={onItemClick}
+                        onClick={(e) => {
+                            window.scrollTo(0, 0);
+                            if (onItemClick) onItemClick(e);
+                        }}
                         to={item.link}
                         style={{
                             color: hovered === idx || isActive
@@ -215,7 +225,10 @@ const MobileNavbar = ({ visible }) => {
                             <Link
                                 key={`sheet-link-${idx}`}
                                 to={item.link}
-                                onClick={() => setIsOpen(false)}
+                                onClick={() => {
+                                    window.scrollTo(0, 0);
+                                    setIsOpen(false);
+                                }}
                                 className={cn(
                                     "flex items-center gap-3 px-4 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-200 active:scale-95",
                                     isActive

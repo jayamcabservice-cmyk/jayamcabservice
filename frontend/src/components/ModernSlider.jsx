@@ -102,8 +102,8 @@ const ModernSlider = React.memo(() => {
     }, [isPaused]);
 
     return (
-        <section ref={sectionRef} className="py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <section ref={sectionRef} className="py-12 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
                 <div ref={headingRef} className="text-center">
                     <h2 className="text-4xl md:text-5xl font-bold text-india-blue-800 mb-4">
                         Popular Destinations of Maharashtra

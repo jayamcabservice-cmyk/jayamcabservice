@@ -35,7 +35,7 @@ const WhyChooseUs = () => {
     ];
 
     return (
-        <section id="about" className="py-12 sm:py-16 lg:py-20 bg-white">
+        <section id="about" className="py-12 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div ref={headingRef} className="text-center mb-8 sm:mb-12 lg:mb-16">

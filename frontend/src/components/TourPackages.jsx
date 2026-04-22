@@ -212,7 +212,7 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
     };
 
     return (
-        <section ref={sectionRef} id="packages" className="py-20 bg-gradient-to-b from-white to-gray-50">
+        <section ref={sectionRef} id="packages" className="py-12 bg-gradient-to-b from-white to-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div ref={headingRef} className="text-center mb-8 sm:mb-10">
@@ -272,7 +272,7 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                         className="package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group relative"
                                     >
                                         {/* Image */}
-                                        <div className="relative h-48 sm:h-56 md:h-64 [perspective:1000px] group/img z-20">
+                                        <div className="relative h-40 sm:h-48 md:h-52 [perspective:1000px] group/img z-20">
                                             <div className="w-full h-full relative transition-transform duration-700 [transform-style:preserve-3d] group-hover/img:[transform:rotateY(180deg)]">
                                                 {/* Front Face */}
                                                 <div className="absolute inset-0 [backface-visibility:hidden] overflow-hidden">
@@ -284,9 +284,7 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                                     />
                                                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none"></div>
 
-                                                    <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm px-2.5 sm:px-3 py-1 rounded-full shadow-lg">
-                                                        <span className="text-xl sm:text-2xl">{pkg.emoji}</span>
-                                                    </div>
+
                                                     <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
                                                         <span className="text-white/90 text-xs sm:text-sm font-medium bg-india-blue-600/80 backdrop-blur-sm px-2.5 sm:px-3 py-1 rounded-full shadow-lg">
                                                             {pkg.duration}
@@ -304,12 +302,12 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                         </div>
 
                                         {/* Content */}
-                                        <div className="p-4 sm:p-5 md:p-6 relative">
+                                        <div className="p-3 sm:p-4 md:p-5 relative">
                                             <div className="relative z-10">
-                                                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-india-blue-800 mb-2 group-hover:text-india-blue-900 transition-colors line-clamp-2">
+                                                <h3 className="text-base sm:text-lg md:text-xl font-bold text-india-blue-800 mb-1 group-hover:text-india-blue-900 transition-colors line-clamp-2">
                                                     {pkg.title}
                                                 </h3>
-                                                <p className="text-sm sm:text-base text-gray-600 mb-2 group-hover:text-gray-700 transition-colors line-clamp-1">{pkg.location}</p>
+                                                <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-1 group-hover:text-gray-700 transition-colors line-clamp-1">{pkg.location}</p>
 
                                                 <div className="flex items-center justify-between mt-4 sm:mt-5 md:mt-6">
                                                     <div>
@@ -349,19 +347,15 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                 {showHardcoded && type === 'maharashtra' && (
                     <>
                         {/* Packages Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                        <div className={preview ? "flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-6 pb-6 pt-4 -mt-4 px-4 -mx-4 sm:mx-0 sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"}>
                             {maharashtraRoutes.map((pkg) => (
                                 <motion.div
                                     key={pkg.id}
-                                    /* initial={{ opacity: 0, y: 50 }} */
-                                    /* whileInView={{ opacity: 1, y: 0 }} */
-                                    /* viewport={{ once: true }} */
-                                    /* transition={{ duration: 0.6 }} */
                                     whileHover={{ y: -10 }}
-                                    className="package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group relative"
+                                    className={`package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group relative ${preview ? 'w-[85vw] sm:w-[350px] lg:w-[400px] flex-shrink-0 snap-center' : ''}`}
                                 >
                                     {/* Image */}
-                                    <div className="relative h-48 sm:h-56 lg:h-64 overflow-hidden">
+                                    <div className="relative h-40 sm:h-48 lg:h-52 overflow-hidden">
                                         <motion.img
                                             src={pkg.image}
                                             alt={pkg.title}
@@ -376,9 +370,7 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                             className="absolute inset-0 bg-gradient-to-br from-india-saffron-500/40 via-transparent to-india-blue-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                                         />
 
-                                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg">
-                                            <span className="text-2xl">{pkg.emoji}</span>
-                                        </div>
+
                                         <div className="absolute bottom-4 left-4">
                                             <span className="text-white/90 text-sm font-medium bg-india-blue-600/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg">
                                                 {pkg.duration}
@@ -401,14 +393,14 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                     </div>
 
                                     {/* Content */}
-                                    <div className="p-6 relative">
+                                    <div className="p-4 sm:p-5 relative">
                                         <div className="absolute inset-0 bg-gradient-to-br from-india-blue-50/0 to-india-saffron-50/0 group-hover:from-india-blue-50/50 group-hover:to-india-saffron-50/50 transition-all duration-500 rounded-b-2xl" />
 
                                         <div className="relative z-10">
-                                            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-india-blue-800 mb-2 group-hover:text-india-blue-900 transition-colors leading-tight">
+                                            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-india-blue-800 mb-1 group-hover:text-india-blue-900 transition-colors leading-tight">
                                                 {pkg.title}
                                             </h3>
-                                            <p className="text-sm text-gray-600 mb-1.5 group-hover:text-gray-700 transition-colors">{pkg.location}</p>
+                                            <p className="text-xs sm:text-sm text-gray-600 mb-1.5 group-hover:text-gray-700 transition-colors">{pkg.location}</p>
 
                                             <div className="flex items-center justify-between mt-6">
                                                 <div>
@@ -441,19 +433,15 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                 {showHardcoded && type === 'india' && (
                     <>
                         {/* Packages Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                        <div className={preview ? "flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-6 pb-6 pt-4 -mt-4 px-4 -mx-4 sm:mx-0 sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"}>
                             {indiaPackages.map((pkg) => (
                                 <motion.div
                                     key={pkg.id}
-                                    /* initial={{ opacity: 0, y: 50 }} */
-                                    /* whileInView={{ opacity: 1, y: 0 }} */
-                                    /* viewport={{ once: true }} */
-                                    /* transition={{ duration: 0.6 }} */
                                     whileHover={{ y: -10 }}
-                                    className="package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group relative"
+                                    className={`package-card bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group relative ${preview ? 'w-[85vw] sm:w-[350px] lg:w-[400px] flex-shrink-0 snap-center' : ''}`}
                                 >
                                     {/* Image */}
-                                    <div className="relative h-64 overflow-hidden">
+                                    <div className="relative h-40 sm:h-48 lg:h-52 overflow-hidden">
                                         <motion.img
                                             src={pkg.image}
                                             alt={pkg.title}
@@ -467,9 +455,7 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                             className="absolute inset-0 bg-gradient-to-br from-india-saffron-500/40 via-transparent to-india-blue-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                                         />
 
-                                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg">
-                                            <span className="text-2xl">{pkg.emoji}</span>
-                                        </div>
+
                                         <div className="absolute bottom-4 left-4">
                                             <span className="text-white/90 text-sm font-medium bg-india-blue-600/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg">
                                                 {pkg.duration}
@@ -492,14 +478,14 @@ const TourPackages = React.memo(({ preview = false, showHardcoded = false, type 
                                     </div>
 
                                     {/* Content */}
-                                    <div className="p-6 relative">
+                                    <div className="p-4 sm:p-5 relative">
                                         <div className="absolute inset-0 bg-gradient-to-br from-india-blue-50/0 to-india-saffron-50/0 group-hover:from-india-blue-50/50 group-hover:to-india-saffron-50/50 transition-all duration-500 rounded-b-2xl" />
 
                                         <div className="relative z-10">
-                                            <h3 className="text-2xl font-bold text-india-blue-800 mb-2 group-hover:text-india-blue-900 transition-colors">
+                                            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-india-blue-800 mb-1 group-hover:text-india-blue-900 transition-colors leading-tight">
                                                 {pkg.title}
                                             </h3>
-                                            <p className="text-gray-600 mb-2 group-hover:text-gray-700 transition-colors">{pkg.location}</p>
+                                            <p className="text-xs sm:text-sm text-gray-600 mb-1.5 group-hover:text-gray-700 transition-colors">{pkg.location}</p>
 
                                             <div className="flex items-center justify-between mt-6">
                                                 <div>

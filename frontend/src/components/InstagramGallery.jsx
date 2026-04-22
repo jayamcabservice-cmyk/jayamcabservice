@@ -1,12 +1,15 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaHeart, FaMapMarkerAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import useIntersectionReveal from '../hooks/useIntersectionReveal';
 
 const InstagramGallery = () => {
     const headingRef = useIntersectionReveal('fadeUp', { duration: 0.8 });
-    const gridRef = useIntersectionReveal('staggerScale', { stagger: 0.08, start: 'top 80%' });
     const ctaRef = useIntersectionReveal('scaleIn', { delay: 0.3 });
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const nextSlide = () => setActiveIndex((prev) => (prev + 1) % photos.length);
+    const prevSlide = () => setActiveIndex((prev) => (prev - 1 + photos.length) % photos.length);
 
     const photos = [
         {
@@ -60,63 +63,98 @@ const InstagramGallery = () => {
     ];
 
     return (
-        <section className="py-20 bg-white">
+        <section className="py-12 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div ref={headingRef} className="text-center mb-12">
+                <div ref={headingRef} className="text-center mb-10">
                     <h2 className="text-4xl md:text-5xl font-bold text-india-blue-800 mb-4">
-                        Travel Gallery
+                        Experience The Magic
                     </h2>
-                    <p className="text-xl text-gray-600">Follow our adventures @tstravels</p>
+                    <p className="text-xl text-gray-600">Explore breathtaking destinations from our travel gallery</p>
                 </div>
 
-                <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {photos.map((photo) => (
-                        <motion.div
-                            key={photo.id}
-                            whileHover={{ scale: 1.05, zIndex: 10 }}
-                            className="relative aspect-square rounded-2xl overflow-hidden shadow-lg group cursor-pointer"
-                        >
-                            <img
-                                src={photo.image}
-                                alt={photo.location}
-                                loading="lazy"
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            />
+                {/* Deck of Cards Coverflow */}
+                <div className="relative w-full h-[400px] sm:h-[450px] lg:h-[500px] flex items-center justify-center overflow-hidden py-4 perspective-1000">
+                    <AnimatePresence initial={false}>
+                        {photos.map((photo, index) => {
+                            let offset = index - activeIndex;
+                            if (offset > photos.length / 2) offset -= photos.length;
+                            if (offset < -photos.length / 2) offset += photos.length;
 
-                            {/* Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div className="absolute bottom-0 left-0 right-0 p-4">
-                                    <div className="flex items-center justify-between text-white">
-                                        <div className="flex items-center gap-2">
-                                            <FaMapMarkerAlt className="text-india-saffron-400" />
-                                            <span className="font-bold">{photo.location}</span>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <FaHeart className="text-red-400" />
-                                            <span className="font-bold">{photo.likes}</span>
+                            const isCenter = offset === 0;
+                            const absOffset = Math.abs(offset);
+
+                            const xPos = `${offset * 55}%`;
+                            const scale = isCenter ? 1 : Math.max(0.6, 1 - absOffset * 0.15);
+                            const zIndex = 20 - absOffset;
+                            const blur = isCenter ? 0 : absOffset * 3;
+                            const opacity = absOffset > 2 ? 0 : (isCenter ? 1 : 0.6);
+                            // pseudo random rotation based on id so it remains consistent and acts like physically scattered cards
+                            const rotateDeg = isCenter ? 0 : ((photo.id * 7) % 24) - 12;
+
+                            return (
+                                <motion.div
+                                    key={photo.id}
+                                    className="absolute w-[65vw] sm:w-[45vw] md:w-[350px] lg:w-[400px] aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl cursor-pointer"
+                                    animate={{
+                                        x: xPos,
+                                        scale: scale,
+                                        rotateZ: rotateDeg,
+                                        zIndex: zIndex,
+                                        filter: `blur(${blur}px)`,
+                                        opacity: opacity,
+                                    }}
+                                    transition={{
+                                        duration: 0.5,
+                                        ease: [0.32, 0.72, 0, 1]
+                                    }}
+                                    onClick={() => {
+                                        if (!isCenter) setActiveIndex(index);
+                                    }}
+                                >
+                                    <img
+                                        src={photo.image}
+                                        alt={photo.location}
+                                        loading="lazy"
+                                        className="w-full h-full object-cover"
+                                    />
+                                    {/* Overlay */}
+                                    <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 flex flex-col justify-end p-4 sm:p-6 ${isCenter ? 'opacity-100' : 'opacity-0'}`}>
+                                        <div className="flex items-center justify-between text-white">
+                                            <div className="flex items-center gap-2">
+                                                <FaMapMarkerAlt className="text-india-saffron-400 text-lg sm:text-xl md:text-2xl" />
+                                                <span className="font-bold text-lg sm:text-xl md:text-2xl drop-shadow-md">{photo.location}</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <FaHeart className="text-red-400 text-lg sm:text-xl" />
+                                                <span className="font-bold text-base sm:text-lg drop-shadow-md">{photo.likes}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                    {/* Border glow effect on center element */}
+                                    {isCenter && (
+                                        <div className="absolute inset-0 border-2 border-white/20 rounded-2xl sm:rounded-3xl shadow-inner pointer-events-none"></div>
+                                    )}
+                                </motion.div>
+                            );
+                        })}
+                    </AnimatePresence>
 
-                            {/* Border glow effect on hover */}
-                            <div className="absolute inset-0 border-2 border-transparent group-hover:border-india-saffron-400 rounded-2xl transition-all duration-300"></div>
-                        </motion.div>
-                    ))}
-                </div>
-
-                <div ref={ctaRef} className="text-center mt-12">
-                    <motion.a
-                        href="https://instagram.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="inline-block px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
+                    {/* Navigation Arrows */}
+                    <button 
+                        onClick={prevSlide}
+                        className="absolute left-2 sm:left-4 lg:left-12 z-[60] bg-white/70 hover:bg-white text-india-blue-800 p-3 sm:p-4 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110"
                     >
-                        Follow Us on Instagram
-                    </motion.a>
+                        <FaChevronLeft className="text-lg sm:text-xl md:text-2xl" />
+                    </button>
+                    <button 
+                        onClick={nextSlide}
+                        className="absolute right-2 sm:right-4 lg:right-12 z-[60] bg-white/70 hover:bg-white text-india-blue-800 p-3 sm:p-4 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110"
+                    >
+                        <FaChevronRight className="text-lg sm:text-xl md:text-2xl" />
+                    </button>
                 </div>
+
+
             </div>
         </section>
     );

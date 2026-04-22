@@ -12,7 +12,7 @@ const FloatingWhatsApp = () => {
             <motion.a
                 href={`tel:${PHONE}`}
                 aria-label="Call us"
-                className="call-blink lg:hidden fixed right-4 z-[100] bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-14 h-14 transition-colors duration-300"
+                className="call-blink lg:hidden fixed right-4 z-[40] bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-14 h-14 transition-colors duration-300"
                 style={{ bottom: 'calc(5.25rem + env(safe-area-inset-bottom, 0px))' }}
                 whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.93 }}
@@ -25,7 +25,7 @@ const FloatingWhatsApp = () => {
                 href={WHATSAPP}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="whatsapp-blink fixed right-4 z-[100] bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-14 h-14 transition-colors duration-300"
+                className="whatsapp-blink fixed right-4 z-[40] bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-14 h-14 transition-colors duration-300"
                 style={{ bottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))' }}
                 whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.95 }}

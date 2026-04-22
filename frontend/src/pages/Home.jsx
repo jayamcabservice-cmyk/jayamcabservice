@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, memo } from 'react';
+import React, { useRef, useEffect, memo, useState } from 'react';
 import Hero from '../components/Hero';
 import ModernSlider from '../components/ModernSlider';
 import TourPackages from '../components/TourPackages';
@@ -7,11 +7,12 @@ import InstagramGallery from '../components/InstagramGallery';
 import Testimonials from '../components/Testimonials';
 import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import useIntersectionReveal from '../hooks/useIntersectionReveal';
 
 const Home = memo(() => {
     const viewAllRef = useIntersectionReveal('scaleIn', { delay: 0.2 });
+    const [activePackageTab, setActivePackageTab] = useState('maharashtra');
 
     return (
         <>
@@ -29,31 +30,51 @@ const Home = memo(() => {
             <Hero />
             <ModernSlider />
 
-            {/* Hardcoded Popular Maharashtra Routes Section */}
-            <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <TourPackages showHardcoded={true} type="maharashtra" preview={false} />
+            {/* Tour Packages Tabbed Section */}
+            <div className="pt-10 pb-2 bg-white flex justify-center w-full relative z-10">
+                <div className="bg-gray-100 p-1.5 rounded-full flex gap-1 shadow-inner border border-gray-200">
+                    <button
+                        onClick={() => setActivePackageTab('maharashtra')}
+                        className={`px-6 sm:px-10 py-2.5 rounded-full font-bold text-sm sm:text-base transition-all duration-300 ${activePackageTab === 'maharashtra' ? 'bg-india-blue-600 text-white shadow-lg scale-105' : 'text-gray-600 hover:text-india-blue-800 hover:bg-gray-200'}`}
+                    >
+                        Maharashtra Packages
+                    </button>
+                    <button
+                        onClick={() => setActivePackageTab('india')}
+                        className={`px-6 sm:px-10 py-2.5 rounded-full font-bold text-sm sm:text-base transition-all duration-300 ${activePackageTab === 'india' ? 'bg-india-blue-600 text-white shadow-lg scale-105' : 'text-gray-600 hover:text-india-blue-800 hover:bg-gray-200'}`}
+                    >
+                        All India Packages
+                    </button>
                 </div>
-            </section>
+            </div>
 
-            {/* Hardcoded India Tour Packages Section */}
-            <section className="py-16 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <TourPackages showHardcoded={true} type="india" preview={false} />
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={activePackageTab}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -30 }}
+                    transition={{ duration: 0.4 }}
+                >
+                    <TourPackages 
+                        showHardcoded={true} 
+                        type={activePackageTab} 
+                        preview={true} 
+                    />
+                </motion.div>
+            </AnimatePresence>
 
-                    <div ref={viewAllRef} className="text-center mt-8">
-                        <Link to="/packages">
-                            <motion.button
-                                whileHover={{ scale: 1.05, boxShadow: "0 15px 35px rgba(0, 86, 214, 0.3)" }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-10 py-4 bg-gradient-to-r from-india-blue-600 to-india-blue-700 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
-                            >
-                                View All Packages
-                            </motion.button>
-                        </Link>
-                    </div>
-                </div>
-            </section>
+            <div ref={viewAllRef} className="text-center pb-12 bg-gray-50 relative z-10 w-full">
+                <Link to="/packages">
+                    <motion.button
+                        whileHover={{ scale: 1.05, boxShadow: "0 15px 35px rgba(0, 86, 214, 0.3)" }}
+                        whileTap={{ scale: 0.95 }}
+                        className="px-10 py-4 bg-gradient-to-r from-india-blue-600 to-india-blue-700 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
+                    >
+                        View All Packages
+                    </motion.button>
+                </Link>
+            </div>
 
             <WhyChooseUs />
             <InstagramGallery />

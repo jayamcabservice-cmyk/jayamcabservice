@@ -74,19 +74,10 @@ const PricingTable = () => {
         },
     ];
 
-    const stateTaxes = [
-        { state: 'Maharashtra', taxes: [0, 0, 0, 0, 0] },
-        { state: 'Goa', taxes: [750, 750, 1400, 5800, 8000] },
-        { state: 'Rajasthan', taxes: [500, 500, 1000, 3000, 5000] },
-        { state: 'Kerala', taxes: [750, 750, 1400, 5800, 8000] },
-        { state: 'Karnataka', taxes: [350, 500, 1000, 3000, 5000] },
-        { state: 'Tamil Nadu', taxes: [350, 500, 1000, 1500, 3000] },
-    ];
 
-    const vehicleHeaders = ['🚗 Hatch', '🚙 Sedan', '🚙 SUV', '🚐 Tempo', '🚌 Coach'];
 
     return (
-        <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+        <section className="pt-6 pb-20 bg-gradient-to-b from-white to-gray-50">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
                 <div className="text-center mb-14">
@@ -189,52 +180,7 @@ const PricingTable = () => {
                     ))}
                 </div>
 
-                {/* ===== STATE TAXES TABLE ===== */}
-                <div ref={taxRef}>
-                    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-                        <div className="bg-india-blue-800 text-white px-6 py-4 flex items-center justify-between">
-                            <h3 className="font-bold text-lg">State Border Taxes</h3>
-                            <span className="text-india-blue-200 text-xs">Additional charges when crossing states</span>
-                        </div>
 
-                        <div className="overflow-x-auto">
-                            <table className="w-full">
-                                <thead>
-                                    <tr className="bg-gray-50 border-b border-gray-200">
-                                        <th className="text-left py-3 px-6 font-bold text-gray-700 text-sm">State</th>
-                                        {vehicleHeaders.map((h, i) => (
-                                            <th key={i} className="py-3 px-4 font-bold text-gray-700 text-sm text-center whitespace-nowrap">
-                                                {h}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {stateTaxes.map((row, i) => (
-                                        <tr key={i} className={`border-b border-gray-100 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'} hover:bg-india-blue-50/30 transition-colors`}>
-                                            <td className="py-3.5 px-6 font-semibold text-gray-800 text-sm">{row.state}</td>
-                                            {row.taxes.map((tax, j) => (
-                                                <td key={j} className="py-3.5 px-4 text-center text-sm">
-                                                    {tax === 0 ? (
-                                                        <span className="text-green-500 font-bold">Free</span>
-                                                    ) : (
-                                                        <span className="text-gray-700 font-medium">₹{tax.toLocaleString()}</span>
-                                                    )}
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div className="px-6 py-3 bg-gray-50 border-t border-gray-200">
-                            <p className="text-xs text-gray-400 italic">
-                                * Taxes approximate and subject to change. Toll & parking charges extra.
-                            </p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     );
